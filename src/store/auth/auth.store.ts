@@ -1,5 +1,3 @@
-"use client"
-
 import { User } from "@/interfaces/User";
 import { toast } from "react-toastify";
 import { StateCreator, create } from "zustand";

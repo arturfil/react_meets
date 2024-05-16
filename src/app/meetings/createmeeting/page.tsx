@@ -7,9 +7,9 @@ import { useSubjectStore } from "@/store/subject/subject";
 import { useEffect, useState, MouseEvent }  from "react";
 
 function CreateMeetingPage() {
-  console.log(JSON.parse(localStorage.getItem("meetings_tk")!)!)
-
   const getTeachers = useAuthStore((state) => state.getTeachers);
+  const user = useAuthStore((state) => state.user);
+  const getUser = useAuthStore((state) => state.getUserByToken);
   const teachers = useAuthStore((state) => state.teachers);
 
   const getSubjects = useSubjectStore(state => state.getSubjects);
@@ -27,16 +27,19 @@ function CreateMeetingPage() {
   useEffect(() => {
     getTeachers();
     getSubjects();
+    getUser();
   }, []);
 
   const handleSubmit = async (e: MouseEvent<HTMLButtonElement>) => {
     let payload = {
-            subject: selection.subject,
-            teacher: selection.teacher,
-            start_time: selection.start_time += ":00.000Z",
-            end_time: selection.start_time += ":00.000Z"
+            student_id : user?.id!,
+            subject_id : selection.subject,
+            teacher_id : selection.teacher,
+            start_time : `${selection.start_time}:00.000Z`,
+            end_time   : `${selection.end_time}:00.000Z`,
         }
     createMeeting(payload)
+    console.log(payload.end_time);
   }
 
   return (

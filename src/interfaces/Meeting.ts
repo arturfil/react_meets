@@ -11,10 +11,11 @@ export interface Meeting {
 }
 
 export interface MeetingSubmission {
-    subject		: string,
-    teacher		: string,
-    start_time	: string,
-    end_time	: string,
+    student_id  : string;
+    subject_id	: string;
+    teacher_id	: string;
+    start_time	: string;
+    end_time	: string;
 }
 
 export interface MeetingResponse {
