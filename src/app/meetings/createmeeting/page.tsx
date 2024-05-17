@@ -48,11 +48,6 @@ function CreateMeetingPage() {
         Reserve a Meeting
       </h2>
 
-      <p>subject: {JSON.stringify(selection.subject)}</p>
-      <p>teacher: {JSON.stringify(selection.teacher)}</p>
-      <p>start_time: {JSON.stringify(selection.start_time)}</p>
-      <p>end_time: {JSON.stringify(selection.end_time)}</p>
-
       <div className="grid lg:grid-cols-4 
        sm:grid-cols-2 gap-10 bg-gray-200 
        p-10 rounded-2xl"

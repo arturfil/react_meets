@@ -1,12 +1,11 @@
 "use client";
 
 import { useUIStore } from "@/store/ui/ui-store";
-import { ChevronFirst, ChevronLast, MoreVertical, BookCheck, LogOut } from "lucide-react";
+import { ChevronFirst, ChevronLast, MoreVertical, BookCheck, LogOut, UserRoundPlus } from "lucide-react";
 import Link from "next/link";
-import { BarChart3, Boxes, Package, Receipt, UserCircle } from "lucide-react";
+import { BarChart3,  Package, UserCircle } from "lucide-react";
 import { useAuthStore } from "@/store/auth/auth.store";
-import { redirect, useRouter } from "next/navigation";
-import { MouseEventHandler } from "react";
+import { redirect, usePathname, useRouter } from "next/navigation";
 
 interface SideBarProps {
   icon: JSX.Element;
@@ -14,16 +13,13 @@ interface SideBarProps {
   active?: boolean;
   alert?: boolean;
   url?: string;
-  // action?: MouseEventHandler<HTMLAnchorElement> | undefined
   action?: () => void;
 }
-
 
 const pages = [
   {alert: true,  url: "/", active: true, icon: <BarChart3 size={20} />, text: "Home", },
   {alert: false, url: "/meetings/createmeeting", active: false, icon: <Package size={20} />, text: "Reserve", },
   {alert: false, url: "/teacher", active: false, icon: <BookCheck size={20} />, text: "Teacher", },
-  // {alert: false, url: "/login", active: false, icon: <UserCircle size={20} />, text: "Login", },
 ];
 
 export default function SideNav() {
@@ -38,7 +34,6 @@ export default function SideNav() {
   const toggleMenu = useUIStore((state) => state.toggleSideNav);
 
   function handleLogOut() {
-    // router.replace("/")
     logoutUser()
     redirect("/")
   }
@@ -78,14 +73,24 @@ export default function SideNav() {
                 active={false} 
             />
         ): (
-            <SidebarItem 
-                key={"login"} 
-                url="/login"
-                icon={<UserCircle size={20} />} 
-                text="Log In" 
-                alert={false} 
-                active={false} 
-            />
+            <>
+                <SidebarItem 
+                    key={"login"} 
+                    url="/login"
+                    icon={<UserCircle size={20} />} 
+                    text="Log In" 
+                    alert={false} 
+                    active={false} 
+                />
+                <SidebarItem 
+                    key={"signup"} 
+                    url="/signup"
+                    icon={<UserRoundPlus size={20} />} 
+                    text="Sign Up" 
+                    alert={false} 
+                    active={false} 
+                />
+            </>
         )}
 
         </ul>
@@ -117,19 +122,20 @@ export default function SideNav() {
 }
 
 export function SidebarItem({ icon, text, active, alert, url, action }: SideBarProps) {
+  const pathname = usePathname()
   const isSideNavOpen = useUIStore((state) => state.isSideNavOpen);
+  const activeClass = pathname === url ? "bg-gradient-to-tr from-gray-200 to-blue-100 text-gray-800" : ""
+  console.log()
+
   return (
     <Link href={url ? url : ""} onClick={action ? () => action() : null}>
       <li
         className={`
-                relative flex items-center py-2 px-3 my-1 
-                font-medium rounded-md cursor-pointer transition-colors group
-                ${
-                  active
-                    ? "bg-gradient-to-tr from-gray-200 to-blue-100 text-gray-800"
-                    : "hover:bg-yellow-50 text-gray-600"
-                } 
-            `}
+            ${activeClass}
+            relative flex items-center py-2 px-3 my-1 
+            font-medium rounded-md cursor-pointer transition-colors group
+            hover:bg-yellow-50 text-gray-600
+        `}
       >
         {icon}
         <span

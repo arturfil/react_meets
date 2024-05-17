@@ -30,12 +30,13 @@ export default function Login() {
   }
 
   return (
-    <div className="mt-40">
+    <div className="mt-20">
       <div className="w-96 p-8 bg-gray-100 rounded-xl shadow h-[500px]">
 
         <h2 className="text-2xl mb-6 font-bold justify-center flex">Login</h2>
 
         <form onSubmit={handleLogin}>
+
             <div className="mb-4">
               <label
                 className="block text-gray-700 text-sm font-bold mb-2"
@@ -71,7 +72,10 @@ export default function Login() {
             </button>
 
             <div className="mt-4">
-              <Link href="/">If you don't have an account yet click here</Link>
+              <Link href="/signup" className=""
+              >
+                If you don't have an account yet click here
+              </Link>
             </div>
         </form>
 
