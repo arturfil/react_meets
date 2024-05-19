@@ -5,7 +5,7 @@ interface Props {
     props: MeetingResponse
 }
 
-export default function Card({props}: Props) {
+export default function MeetingCard({props}: Props) {
   return (
     <div className="w-60 p-2 bg-gray-100 rounded-xl shadow-md hover:shadow-lg">
         <h2 className="font-bold text-lg">
