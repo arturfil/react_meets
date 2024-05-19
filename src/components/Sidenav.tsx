@@ -5,7 +5,8 @@ import { ChevronFirst, ChevronLast, MoreVertical, BookCheck, LogOut, UserRoundPl
 import Link from "next/link";
 import { BarChart3,  Package, UserCircle } from "lucide-react";
 import { useAuthStore } from "@/store/auth/auth.store";
-import { redirect, usePathname, useRouter } from "next/navigation";
+import { redirect, usePathname } from "next/navigation";
+import useHasMounted from "@/hooks/hasMounted";
 
 interface SideBarProps {
   icon: JSX.Element;
@@ -17,17 +18,17 @@ interface SideBarProps {
 }
 
 const pages = [
-  {alert: true,  url: "/", active: true, icon: <BarChart3 size={20} />, text: "Home", },
-  {alert: false, url: "/meetings/createmeeting", active: false, icon: <Package size={20} />, text: "Reserve", },
-  {alert: false, url: "/teacher", active: false, icon: <BookCheck size={20} />, text: "Teacher", },
+  {alert: true,  url: "/", icon: <BarChart3 size={20} />, text: "Home", },
+  {alert: false, url: "/meetings/createmeeting", icon: <Package size={20} />, text: "Reserve", },
+  {alert: false, url: "/teacher", icon: <BookCheck size={20} />, text: "Teacher", },
 ];
 
 export default function SideNav() {
 
+  const hasMounted = useHasMounted();
+
   const isLoggedIn = useAuthStore(state => state.isLoggedIn());
   const logoutUser = useAuthStore(state => state.logoutUser);
-  const status = useAuthStore(state => state.status)
-  const router = useRouter()
 
   const user = null
   const isSideNavOpen = useUIStore((state) => state.isSideNavOpen);
@@ -51,49 +52,48 @@ export default function SideNav() {
           </button>
         </div>
 
-        <ul className="flex-1 px-3">
-        { pages.map(page => (
-            <SidebarItem 
-              key={page.url} 
-              icon={page.icon} 
-              url={page.url} 
-              text={page.text} 
-              alert={page.alert} 
-              active={page.active}
-            />
-        ))}
+        {hasMounted && (
 
-        {isLoggedIn ? (
-            <SidebarItem 
-                action={handleLogOut} 
-                key={"logout"} 
-                icon={<LogOut/>} 
-                text="logout" 
-                alert={false} 
-                active={false} 
-            />
-        ): (
-            <>
+            <ul className="flex-1 px-3">
+            { pages.map(page => (
                 <SidebarItem 
-                    key={"login"} 
-                    url="/login"
-                    icon={<UserCircle size={20} />} 
-                    text="Log In" 
-                    alert={false} 
-                    active={false} 
+                  key={page.url} 
+                  icon={page.icon} 
+                  url={page.url} 
+                  text={page.text} 
+                  alert={page.alert} 
                 />
+            ))}
+
+            {isLoggedIn ? (
                 <SidebarItem 
-                    key={"signup"} 
-                    url="/signup"
-                    icon={<UserRoundPlus size={20} />} 
-                    text="Sign Up" 
+                    action={handleLogOut} 
+                    key={"logout"} 
+                    icon={<LogOut/>} 
+                    text="logout" 
                     alert={false} 
-                    active={false} 
                 />
-            </>
+            ): (
+                <>
+                    <SidebarItem 
+                        key={"login"} 
+                        url="/login"
+                        icon={<UserCircle size={20} />} 
+                        text="Log In" 
+                        alert={false} 
+                    />
+                    <SidebarItem 
+                        key={"signup"} 
+                        url="/signup"
+                        icon={<UserRoundPlus size={20} />} 
+                        text="Sign Up" 
+                        alert={false} 
+                    />
+                </>
+            )}
+            </ul>
+
         )}
-
-        </ul>
 
         {user && (
 
@@ -102,6 +102,7 @@ export default function SideNav() {
             src="https://ui-avatars.com/api/?background=ffdd44&color=1130a3&bold=true"
             className="w-10 h-10 rounded-md"
           />
+
           <div
             className={`
                 flex justify-between items-center 
@@ -112,23 +113,26 @@ export default function SideNav() {
               <h4 className="font-semibold">John Doe</h4>
               <span className="text-xs text-gray-60">john@doe.com</span>
             </div>
+
             <MoreVertical size={20} />
           </div>
+
         </div>
         )}
+
       </nav>
     </aside>
   );
 }
 
-export function SidebarItem({ icon, text, active, alert, url, action }: SideBarProps) {
+export function SidebarItem({ icon, text, alert, url, action }: SideBarProps) {
   const pathname = usePathname()
   const isSideNavOpen = useUIStore((state) => state.isSideNavOpen);
   const activeClass = pathname === url ? "bg-gradient-to-tr from-gray-200 to-blue-100 text-gray-800" : ""
   console.log()
 
   return (
-    <Link href={url ? url : ""} onClick={action ? () => action() : null}>
+    <Link href={url ? url : ""} onClick={action ? () => action() : () => {}}>
       <li
         className={`
             ${activeClass}

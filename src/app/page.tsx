@@ -16,6 +16,7 @@ function Home() {
         getUserByToken()     
     }, [])
 
+  if (!meetings) return null;
 
   return (
     <div className="mt-16 ml-10">
