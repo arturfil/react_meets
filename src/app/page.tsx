@@ -10,6 +10,7 @@ import { useSubjectStore } from "@/store/subject/subject";
 import { useEffect } from "react";
 
 function Home() {
+
     const meetings = useMeetingStore(state => state.meetings);
     const getMeetings = useMeetingStore(state => state.getMeetings);
 
@@ -34,17 +35,28 @@ function Home() {
             <MeetingCard key={meeting.id} props={meeting} />
         ))}
       </div>     
-      <br/>
-      <h2 className="font-bold text-xl my-5">Teachers</h2>
-      
+
+      { teachers!.length > 0 ? (
+        <h2 className="font-bold text-xl my-5">Teachers</h2>
+      ) : (
+        <h2 className="font-bold text-xl my-5">Server is trying to fetch the data for teachers</h2>
+      )}
+
       <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-10">
-        {teachers && teachers.map(teacher => (
+        {teachers && teachers.length > 0 && teachers.map(teacher => (
             <UserCard key={teacher.id} user={teacher} />
         ))}
       </div>
-      <h2 className="font-bold text-xl my-5">Courses</h2>
-      <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-10">
-        {subjects && subjects.map(subject => (
+
+
+      { subjects!.length > 0 ? (
+        <h2 className="font-bold text-xl my-5">Subjects</h2>
+      ) : (
+        <h2 className="font-bold text-xl my-5">Server is trying to fetch the data for subjects</h2>
+      )}
+
+      <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-10 mx-auto">
+        {subjects && subjects.length > 0 && subjects.map(subject => (
             <SubjectCard key={subject.id} subject={subject} />
         ))}  
       </div>

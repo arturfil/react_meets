@@ -10,7 +10,7 @@ interface SubjectState {
 }
 
 const storeApi: StateCreator<SubjectState> = (set) => ({
-    subjects: null,
+    subjects: [],
     loading: false,
 
     getSubjects: async () => {

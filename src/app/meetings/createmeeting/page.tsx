@@ -30,6 +30,9 @@ function CreateMeetingPage() {
     getUser();
   }, []);
 
+
+  if (!subjects!.length > 0 || !teachers!.length > 0) return;
+
   const handleSubmit = async (e: MouseEvent<HTMLButtonElement>) => {
     let payload = {
             student_id : user?.id!,
@@ -64,7 +67,7 @@ function CreateMeetingPage() {
             id=""
           >
             <option disabled value="default">Choose a Subject</option>
-            {subjects && subjects.map(s => (
+            {subjects!.length > 0 && subjects.map(s => (
                 <option key={s.id} value={s.id}>{s.name}</option>
             ))}
           </select>
@@ -82,7 +85,7 @@ function CreateMeetingPage() {
             id=""
           >
             <option disabled value="default">Choose a Teacher</option>
-            {teachers &&
+            {teachers.length > 0 &&
               teachers.map((t) => (
                 <option
                   key={t.id}

@@ -7,7 +7,7 @@ export interface AuthState {
   status: string;
   token?: string | undefined;
   user?: User;
-  teachers: User[] | undefined;
+  teachers: User[];
 
   loginUser: (email: string, password: string) => Promise<void>;
   logoutUser: () => void;
@@ -21,9 +21,7 @@ const storeApi: StateCreator<AuthState> = (set) => ({
   status: "pending",
   token: undefined,
   user: undefined,
-  teachers: undefined,
-
-  getAllTeachers: async () => {},
+  teachers: [],
 
   loginUser: async (email: string, password: string) => {
     try {
