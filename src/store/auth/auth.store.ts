@@ -1,4 +1,4 @@
-import { User } from "@/interfaces/User";
+import { RegisterUser, User } from "@/interfaces/User";
 import { toast } from "react-toastify";
 import { StateCreator, create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
@@ -10,6 +10,7 @@ export interface AuthState {
   teachers: User[];
 
   loginUser: (email: string, password: string) => Promise<void>;
+  signUpUser: (user: RegisterUser) => Promise<void>;
   logoutUser: () => void;
   isLoggedIn: () => boolean;
   getTeachers: () => Promise<void>;
@@ -36,6 +37,15 @@ const storeApi: StateCreator<AuthState> = (set) => ({
     } catch (error) {
       console.log(error);
     }
+  },
+
+  signUpUser: async (user: RegisterUser) => {
+    let response = await fetch("http://localhost:8080/api/v1/signup", {
+        method: "POST",
+        body: JSON.stringify(user)
+    }).then(res => res.json());
+
+    console.log("response signup", response);
   },
 
   logoutUser: () => {

@@ -1,13 +1,11 @@
 "use client"
 
+import Link from "next/link";
 import React from "react";
-import { toast } from "react-toastify";
 
 export default function TeacherPage() {
 
-  function handleRequest() {
-        toast.info("Teacher Application Requested")
-  }
+  
 
   return (
     <div className="mt-16 ml-10">
@@ -21,9 +19,9 @@ export default function TeacherPage() {
           You already requeset teacher access? Please wait till the verification
           process is completed or get in contact with support.
         </h2>
-        <button onClick={handleRequest} className="mt-5 text-white text-sm bg-orange-600 px-3 py-1 rounded-lg">
+        <Link href="/requests/createrequests" className="mt-5 text-white text-sm bg-orange-600 px-3 py-1 rounded-lg">
           Request Access
-        </button>
+        </Link>
       </div>
     </div>
   );
