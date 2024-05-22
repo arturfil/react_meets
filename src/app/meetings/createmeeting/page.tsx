@@ -67,7 +67,7 @@ function CreateMeetingPage() {
             id=""
           >
             <option disabled value="default">Choose a Subject</option>
-            {subjects!.length > 0 && subjects.map(s => (
+            {subjects && subjects.length > 0 && subjects.map(s => (
                 <option key={s.id} value={s.id}>{s.name}</option>
             ))}
           </select>
@@ -85,8 +85,8 @@ function CreateMeetingPage() {
             id=""
           >
             <option disabled value="default">Choose a Teacher</option>
-            {teachers.length > 0 &&
-              teachers.map((t) => (p
+            {teachers && teachers.length > 0 &&
+              teachers.map((t) => (
                 <option
                   key={t.id}
                   value={t.id}

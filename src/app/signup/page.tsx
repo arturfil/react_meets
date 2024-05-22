@@ -1,10 +1,12 @@
 "use client"
 
 import { useAuthStore } from "@/store/auth/auth.store";
+import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 import { toast } from "react-toastify";
 
 export default function Signup() {
+  const router = useRouter()
   const signUpUser = useAuthStore(state => state.signUpUser);
   const [user, setUser] = useState({
     email: "",
@@ -23,14 +25,13 @@ export default function Signup() {
     }
     const {confirm_password,  ...obj} = user;
     signUpUser(obj); 
+    router.push("/")
   }
 
   return (
     <div className="mt-20">
       <div className="w-96 p-8 bg-gray-100 rounded-xl shadow h-[700px]">
         <h2 className="text-2xl mb-6 font-bold justify-center flex">Signup</h2>
-
-        <h2>{JSON.stringify(user)}</h2>
 
         <form onSubmit={handelSubmit}>
           <div className="mb-4">
