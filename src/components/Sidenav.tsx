@@ -1,7 +1,7 @@
 "use client";
 
 import { useUIStore } from "@/store/ui/ui-store";
-import { ChevronFirst, ChevronLast, MoreVertical, BookCheck, LogOut, UserRoundPlus } from "lucide-react";
+import { ChevronFirst, ChevronLast, MoreVertical, BookCheck, LogOut, UserRoundPlus, ScrollText } from "lucide-react";
 import Link from "next/link";
 import { BarChart3,  Package, UserCircle } from "lucide-react";
 import { useAuthStore } from "@/store/auth/auth.store";
@@ -21,6 +21,7 @@ const pages = [
   {alert: true,  url: "/", icon: <BarChart3 size={20} />, text: "Home", },
   {alert: false, url: "/meetings/createmeeting", icon: <Package size={20} />, text: "Reserve", },
   {alert: false, url: "/teacher", icon: <BookCheck size={20} />, text: "Teacher", },
+  {alert: false, url: "/requests", icon: <ScrollText size={20} />, text: "Requests" }
 ];
 
 export default function SideNav() {

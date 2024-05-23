@@ -7,11 +7,26 @@ interface RequestsState {
   requests: Request[] | null;
   request: Request | null;
 
+  getAllRequests: () => Promise<void>;
   createRequest: (request: Request) => Promise<void>;
 }
 
 const storeApi: StateCreator<RequestsState> = (set) => ({
   requests: null,
+  request: null,
+
+  getAllRequests: async () => {
+    try {
+        
+    const requests = await fetch("http://localhost:8080/api/v1/requests")
+            .then(res => res.json())
+    console.log(requests)
+    set({requests})
+
+    } catch (error) {
+        console.log(error);
+    }
+  },
 
   createRequest: async (request: Request) => {
     try {
