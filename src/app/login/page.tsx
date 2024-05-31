@@ -7,6 +7,8 @@ import { FormEvent } from "react";
 
 export default function Login() {
   const loginUser = useAuthStore((state) => state.loginUser);
+  const loginResponse = useAuthStore((state) => state.error);
+
   const router = useRouter();
 
   async function handleLogin(event: FormEvent<HTMLFormElement>) {
@@ -21,7 +23,6 @@ export default function Login() {
         await loginUser(email.value, password.value)
         email.value = ""
         password.value = ""
-        router.push("/");
 
     } catch (error) {
         
@@ -34,6 +35,8 @@ export default function Login() {
       <div className="w-96 p-8 bg-gray-100 rounded-xl shadow h-[500px]">
 
         <h2 className="text-2xl mb-6 font-bold justify-center flex">Login</h2>
+
+        {loginResponse && loginResponse.error ? <h2>{loginResponse.message}</h2> : ""} 
 
         <form onSubmit={handleLogin}>
 

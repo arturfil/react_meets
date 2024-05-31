@@ -1,11 +1,10 @@
 "use client"
 
+import AuthGuard from "@/components/AuthGuard";
 import Link from "next/link";
 import React from "react";
 
-export default function TeacherPage() {
-
-  
+function TeacherPage() {
 
   return (
     <div className="mt-16 ml-10">
@@ -26,3 +25,5 @@ export default function TeacherPage() {
     </div>
   );
 }
+
+export default AuthGuard(TeacherPage);

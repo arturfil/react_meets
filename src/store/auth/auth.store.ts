@@ -1,3 +1,4 @@
+import { ErrorLoginResponse } from "@/interfaces/Error";
 import { RegisterUser, User } from "@/interfaces/User";
 import { toast } from "react-toastify";
 import { StateCreator, create } from "zustand";
@@ -8,6 +9,7 @@ export interface AuthState {
   token?: string | undefined;
   user?: User;
   teachers: User[];
+  error: ErrorLoginResponse | undefined;
 
   loginUser: (email: string, password: string) => Promise<void>;
   signUpUser: (user: RegisterUser) => Promise<void>;
@@ -23,6 +25,7 @@ const storeApi: StateCreator<AuthState> = (set) => ({
   token: undefined,
   user: undefined,
   teachers: [],
+  error: undefined,
 
   loginUser: async (email: string, password: string) => {
     try {
@@ -30,6 +33,13 @@ const storeApi: StateCreator<AuthState> = (set) => ({
         method: "POST",
         body: JSON.stringify({ email, password }),
       }).then((res) => res.json());
+
+      console.log("data", data);
+    
+      if (data.error) {
+            set({error: data});
+            return; 
+       }
 
       localStorage.setItem("meetings_tk", JSON.stringify(data.token));
       set({ token: data.token, status: "authenticated" });

@@ -36,7 +36,7 @@ function Home() {
         ))}
       </div>     
 
-      { teachers!.length > 0 ? (
+      { teachers && teachers!.length > 0 ? (
         <h2 className="font-bold text-xl my-5">Teachers</h2>
       ) : (
         <h2 className="font-bold text-xl my-5">Server is trying to fetch the data for teachers</h2>
@@ -49,7 +49,7 @@ function Home() {
       </div>
 
 
-      { subjects!.length > 0 ? (
+      { subjects && subjects!.length > 0 ? (
         <h2 className="font-bold text-xl my-5">Subjects</h2>
       ) : (
         <h2 className="font-bold text-xl my-5">Server is trying to fetch the data for subjects</h2>
