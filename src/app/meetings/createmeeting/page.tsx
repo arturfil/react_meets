@@ -29,22 +29,19 @@ function CreateMeetingPage() {
     getSubjects();
     getUser();
   }, []);
-
-  if (
-    typeof subjects !== "number" ||
-    !subjects.length > 0 ||
-    typeof teachers !== "number" ||
-    !teachers!.length! > 0
-  ) {
-    return (
-      <h2 className="font-bold text-xl my-5">
-        Server cannot get teachers or subjects at this time, please try again
-        later
-      </h2>
-    );
-  }
+ 
+  if (subjects?.length == 0 || teachers?.length == 0) {
+        return (
+          <h2 className="font-bold text-xl my-5">
+            Server cannot get teachers or subjects at this time, please try again
+            later
+          </h2>
+        )
+    }
 
   const handleSubmit = async (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+
     let payload = {
       student_id: user?.id!,
       subject_id: selection.subject,
