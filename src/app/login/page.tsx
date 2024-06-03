@@ -23,7 +23,7 @@ export default function Login() {
         await loginUser(email.value, password.value)
         email.value = ""
         password.value = ""
-
+        router.push("/");
     } catch (error) {
         
     }

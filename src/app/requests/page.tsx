@@ -4,6 +4,7 @@ import AuthGuard from "@/components/AuthGuard";
 import { useRequestStore } from "@/store/requests/requests.store";
 import RequestCard from "@/components/RequestCard";
 import React, { useEffect } from "react";
+import { Request } from "@/interfaces/Request";
 
  function Requests() {
   const requests = useRequestStore((state) => state.requests);
@@ -17,7 +18,7 @@ import React, { useEffect } from "react";
     <div className="mt-16 ml-10">
       <h2 className="font-bold text-5xl my-5">Teacher Requests</h2>
       {requests ? (
-          <RequestsTable props={requests}/>
+          <RequestsTable requests={requests}/>
       ) : (
         <h2 className="font-bold text-xl my-5">Server Trying to reach requests</h2>
       )}
@@ -27,14 +28,14 @@ import React, { useEffect } from "react";
 
 
 interface TableProps {
-    requests: Object 
+    requests: Request[]
 }
 
-export function RequestsTable({requests}: Props) {
+export function RequestsTable({requests}: TableProps) {
   return (
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
         <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-          <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+          <thead className="text-xs text-gray-700 uppercase bg-white-100 dark:bg-gray-500 dark:text-gray-100">
             <tr>
               <th scope="col" className="px-6 py-3">
                 User
@@ -46,7 +47,10 @@ export function RequestsTable({requests}: Props) {
                 Status
               </th>
               <th scope="col" className="px-6 py-3">
-                <span className="sr-only">Edit</span>
+                Approve
+              </th>
+              <th scope="col" className="px-6 py-3">
+                Deny
               </th>
             </tr>
           </thead>
