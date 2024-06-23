@@ -1,3 +1,5 @@
+import { useRequestStore } from "@/store/requests/requests.store";
+
 interface Props {
   user_id: string;
   fullname: string;
@@ -5,6 +7,9 @@ interface Props {
 }
 
 export default function RequestCard({ fullname, user_id, status }: Props) {
+  const updateRequest = useRequestStore(state => state.updateRequest);
+
+
   return (
     <>
       <tr className="bg-white border-b dark:bg-gray-100 dark:border-gray-300 hover:bg-gray-200 dark:hover:bg-gray-200">
@@ -18,6 +23,7 @@ export default function RequestCard({ fullname, user_id, status }: Props) {
         <td className="px-6 py-4">{status}</td>
         <td className="px-6 py-4 text-right">
           <button
+            onClick={() => updateRequest({id: user_id, status: "approved"})}
             className="
             w-full bg-gradient-to-r 
             from-green-400 to-emerald-500 
@@ -29,6 +35,7 @@ export default function RequestCard({ fullname, user_id, status }: Props) {
         </td>
         <td className="px-6 py-4 text-right">
           <button
+            onClick={() => updateRequest({id: user_id, status: "denied"})}
             className="
             w-full bg-gradient-to-r 
             from-red-400 to-orange-500 

@@ -9,9 +9,10 @@ interface RequestsState {
 
   getAllRequests: () => Promise<void>;
   createRequest: (request: Request) => Promise<void>;
+  updateRequest: (request: Request) => Promise<void>;
 }
 
-const storeApi: StateCreator<RequestsState> = (set) => ({
+const storeApi: StateCreator<RequestsState> = (set, get) => ({
   requests: null,
   request: null,
 
@@ -39,6 +40,26 @@ const storeApi: StateCreator<RequestsState> = (set) => ({
       console.log(error);
     }
   },
+
+  updateRequest: async (request: Request) => {
+    try {
+
+        let token = JSON.parse(localStorage.getItem("meetings_tk")!);
+        await fetch("http://localhost:8080/api/v1/request/update", {
+            method: "PUT",
+            body: JSON.stringify(request),
+            headers: {
+              Authorization: "Bearer " + token,
+            },
+        })
+        set(state => ({
+            requests: state.requests!.map(req => req.id === request.id ? {...req, status: request.status} : req)
+        })) 
+        toast.success("updated request")
+    }  catch (error) {
+
+    }
+  }
 });
 
 export const useRequestStore = create<RequestsState>()(
