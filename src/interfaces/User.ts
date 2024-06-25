@@ -3,9 +3,9 @@ export interface User {
     first_name: string;
     last_name: string;
     is_admin?: boolean;
+    roles?: string[]
     email: string;
     password: string;
-    roles?: string[]
 }
 
 export interface RegisterUser {

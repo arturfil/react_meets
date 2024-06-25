@@ -1,7 +1,9 @@
 "use client";
 
 import AuthGuard from "@/components/AuthGuard";
+import Hero from "@/components/Hero";
 import MeetingCard from "@/components/MeetingCard";
+import SearchComponent from "@/components/SearchComponent";
 import SubjectCard from "@/components/SubjectCard";
 import UserCard from "@/components/UserCard";
 import { useAuthStore } from "@/store/auth/auth.store";
@@ -25,11 +27,14 @@ function Home() {
     getUserByToken();
     getTeachers();
     getSubjects();
-  }, []);
+  }, [getSubjects, getTeachers, getUserByToken]);
 
   return (
-    <div className="mt-16 ml-10">
-      <h2 className="font-bold text-5xl text-center w-8/12 my-5">
+    <div className="p-10 m-auto">
+
+      <Hero/>
+      <SearchComponent/>
+      <h2 className="font-bold text-4xl text-center mt-20">
         Reserve A Tutoring Session With Us!
       </h2>
       <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-10">
@@ -72,15 +77,15 @@ function Home() {
       </div>
 
 
-      <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-10 mx-auto justify-self-end">
+      <div className="
+        grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-10 mx-auto
+      ">
         <Link
           href="/meetings/createmeeting"
           className="
-            bg-gradient-to-r my-10 
-            from-green-400 to-emerald-500 
-            text-white rounded-xl p-3 text-center
-            hover:bg-green-600 focus:outline-none"
-        >
+            w-60 bg-gradient-to-r my-10 from-green-400 to-emerald-500 text-white
+            rounded-xl p-3 text-center hover:bg-green-600 focus:outline-none
+          ">
           Reserve Now!
         </Link>
       </div>
@@ -89,4 +94,4 @@ function Home() {
   );
 }
 
-export default AuthGuard(Home);
+export default Home

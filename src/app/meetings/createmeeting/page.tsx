@@ -28,7 +28,7 @@ function CreateMeetingPage() {
     getTeachers();
     getSubjects();
     getUser();
-  }, []);
+  }, [getSubjects, getTeachers, getUser]);
  
   if (subjects?.length == 0 || teachers?.length == 0) {
         return (

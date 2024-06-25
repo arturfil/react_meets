@@ -1,9 +1,18 @@
 "use client";
 
 import { useUIStore } from "@/store/ui/ui-store";
-import { ChevronFirst, ChevronLast, MoreVertical, BookCheck, LogOut, UserRoundPlus, ScrollText } from "lucide-react";
+import {
+  ChevronFirst,
+  ChevronLast,
+  MoreVertical,
+  BookCheck,
+  LogOut,
+  UserRoundPlus,
+  ScrollText,
+  UserRound,
+} from "lucide-react";
 import Link from "next/link";
-import { BarChart3,  Package, UserCircle } from "lucide-react";
+import { BarChart3, Package, UserCircle } from "lucide-react";
 import { useAuthStore } from "@/store/auth/auth.store";
 import { redirect, usePathname } from "next/navigation";
 import useHasMounted from "@/hooks/hasMounted";
@@ -18,31 +27,51 @@ interface SideBarProps {
 }
 
 const pages = [
-  {alert: true,  url: "/", icon: <BarChart3 size={20} />, text: "Home", },
-  {alert: false, url: "/meetings/createmeeting", icon: <Package size={20} />, text: "Reserve", },
-  {alert: false, url: "/teacher", icon: <BookCheck size={20} />, text: "Teacher", },
-  {alert: false, url: "/requests", icon: <ScrollText size={20} />, text: "Requests" }
+  { alert: false, url: "/", icon: <BarChart3 size={20} />, text: "Home" },
+  {
+    alert: false,
+    url: "/meetings/createmeeting",
+    icon: <Package size={20} />,
+    text: "Reserve",
+  },
+  {
+    alert: false,
+    url: "/teacher",
+    icon: <BookCheck size={20} />,
+    text: "Teacher",
+  },
+  {
+    alert: false,
+    url: "/requests",
+    icon: <ScrollText size={20} />,
+    text: "Requests",
+  },
+  {
+    alert: false,
+    url: "/profile",
+    icon: <UserRound size={20} />,
+    text: "Profile",
+  },
 ];
 
 export default function SideNav() {
-
   const hasMounted = useHasMounted();
 
-  const isLoggedIn = useAuthStore(state => state.isLoggedIn());
-  const logoutUser = useAuthStore(state => state.logoutUser);
+  const isLoggedIn = useAuthStore((state) => state.isLoggedIn());
+  const logoutUser = useAuthStore((state) => state.logoutUser);
 
-  const user = null
+  const user = null;
   const isSideNavOpen = useUIStore((state) => state.isSideNavOpen);
   const toggleMenu = useUIStore((state) => state.toggleSideNav);
 
   function handleLogOut() {
-    logoutUser()
-    redirect("/")
+    logoutUser();
+    redirect("/");
   }
 
   return (
-    <aside className={`h-screen bg-orange-100 ${isSideNavOpen ? "max-w-72" : "max-w-16"}`}>
-      <nav className="h-full flex flex-col bg-gradient-to-br to-red-400 from-orange-500 border-r shadow-sm">
+    <aside className={`top-0 sticky h-screen ${isSideNavOpen ? "max-w-72" : "max-w-16"}`}>
+      <nav className="h-full sticky flex flex-col from-orange-500 border-r shadow-sm">
         <div className="p-4 pb-2 flex justify-between items-center">
           <h3 className="overflow-hidden ">Meetings</h3>
           <button
@@ -54,83 +83,81 @@ export default function SideNav() {
         </div>
 
         {hasMounted && (
-
-            <ul className="flex-1 px-3">
-            { pages.map(page => (
-                <SidebarItem 
-                  key={page.url} 
-                  icon={page.icon} 
-                  url={page.url} 
-                  text={page.text} 
-                  alert={page.alert} 
-                />
+          <ul className="flex-1 px-3">
+            {pages.map((page) => (
+              <SidebarItem
+                key={page.url}
+                icon={page.icon}
+                url={page.url}
+                text={page.text}
+                alert={page.alert}
+              />
             ))}
 
             {isLoggedIn ? (
-                <SidebarItem 
-                    action={handleLogOut} 
-                    key={"logout"} 
-                    icon={<LogOut/>} 
-                    text="logout" 
-                    alert={false} 
+              <SidebarItem
+                action={handleLogOut}
+                key={"logout"}
+                icon={<LogOut />}
+                text="logout"
+                alert={false}
+              />
+            ) : (
+              <>
+                <SidebarItem
+                  key={"login"}
+                  url="/login"
+                  icon={<UserCircle size={20} />}
+                  text="Log In"
+                  alert={false}
                 />
-            ): (
-                <>
-                    <SidebarItem 
-                        key={"login"} 
-                        url="/login"
-                        icon={<UserCircle size={20} />} 
-                        text="Log In" 
-                        alert={false} 
-                    />
-                    <SidebarItem 
-                        key={"signup"} 
-                        url="/signup"
-                        icon={<UserRoundPlus size={20} />} 
-                        text="Sign Up" 
-                        alert={false} 
-                    />
-                </>
+                <SidebarItem
+                  key={"signup"}
+                  url="/signup"
+                  icon={<UserRoundPlus size={20} />}
+                  text="Sign Up"
+                  alert={false}
+                />
+              </>
             )}
-            </ul>
-
+          </ul>
         )}
 
         {user && (
+          <div className="border-t flex p-3">
+            <img
+              src="https://ui-avatars.com/api/?background=ffdd44&color=1130a3&bold=true"
+              className="w-10 h-10 rounded-md"
+            />
 
-        <div className="border-t flex p-3">
-          <img
-            src="https://ui-avatars.com/api/?background=ffdd44&color=1130a3&bold=true"
-            className="w-10 h-10 rounded-md"
-          />
-
-          <div
-            className={`
+            <div
+              className={`
                 flex justify-between items-center 
                 overflow-hidden ${isSideNavOpen ? "w-52 ml-3" : "w-0"}
             `}
-          >
-            <div className="leading-4">
-              <h4 className="font-semibold">John Doe</h4>
-              <span className="text-xs text-gray-60">john@doe.com</span>
+            >
+              <div className="leading-4">
+                <h4 className="font-semibold">John Doe</h4>
+                <span className="text-xs text-gray-600">john@doe.com</span>
+              </div>
+
+              <MoreVertical size={20} />
             </div>
-
-            <MoreVertical size={20} />
           </div>
-
-        </div>
         )}
-
       </nav>
     </aside>
   );
 }
 
 export function SidebarItem({ icon, text, alert, url, action }: SideBarProps) {
-  const pathname = usePathname()
+  const pathname = usePathname();
   const isSideNavOpen = useUIStore((state) => state.isSideNavOpen);
-  const activeClass = pathname === url ? "bg-gradient-to-tr from-gray-200 to-blue-100 text-gray-800" : ""
-  console.log()
+  const activeClass =
+    pathname === url
+      ? "bg-gradient-to-tr from-gray-200 to-blue-100 text-gray-800"
+      : "";
+  console.log();
 
   return (
     <Link href={url ? url : ""} onClick={action ? () => action() : () => {}}>
@@ -144,9 +171,7 @@ export function SidebarItem({ icon, text, alert, url, action }: SideBarProps) {
       >
         {icon}
         <span
-          className={`overflow-hidden ${
-            isSideNavOpen ? "w-52 ml-3" : "w-0"
-          }`}
+          className={`overflow-hidden ${isSideNavOpen ? "w-52 ml-3" : "w-0"}`}
         >
           {text}
         </span>

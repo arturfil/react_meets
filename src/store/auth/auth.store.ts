@@ -20,7 +20,7 @@ export interface AuthState {
   getUserByToken: () => Promise<void>;
 }
 
-const storeApi: StateCreator<AuthState> = (set) => ({
+const storeApi: StateCreator<AuthState> = (set, get) => ({
   status: "pending",
   token: undefined,
   user: undefined,
@@ -44,6 +44,10 @@ const storeApi: StateCreator<AuthState> = (set) => ({
       localStorage.setItem("meetings_tk", JSON.stringify(data.token));
       set({ token: data.token, status: "authenticated" });
       toast.success("Logged In!", { theme: "colored" });
+
+      // getUserInfo()
+      get().getUserByToken();
+
     } catch (error) {
       console.log(error);
     }
