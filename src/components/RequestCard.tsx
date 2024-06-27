@@ -1,4 +1,7 @@
 import { useRequestStore } from "@/store/requests/requests.store";
+import { TableCell, TableRow } from "./ui/table";
+import { Check, Clipboard } from "lucide-react";
+import { useState } from "react";
 
 interface Props {
   user_id: string;
@@ -7,21 +10,20 @@ interface Props {
 }
 
 export default function RequestCard({ fullname, user_id, status }: Props) {
-  const updateRequest = useRequestStore(state => state.updateRequest);
-
+  const updateRequest = useRequestStore((state) => state.updateRequest);
+  const [copied, setCopied] = useState(false);
 
   return (
     <>
-      <tr className="bg-white border-b dark:bg-gray-100 dark:border-gray-300 hover:bg-gray-200 dark:hover:bg-gray-200">
-        <th
-          scope="row"
-          className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray-500"
-        >
-          {fullname}
-        </th>
-        <td className="px-6 py-4">{user_id}</td>
-        <td className="px-6 py-4">{status}</td>
-        <td className="px-6 py-4 text-right">
+      <TableRow key={user_id}>
+        <TableCell className="font-medium">
+          <p className="w-[100px] overflow-clip overflow-ellipsis text-nowrap">
+            {user_id}
+          </p>
+        </TableCell>
+        <TableCell>{fullname}</TableCell>
+        <TableCell>{status}</TableCell>
+        <TableCell className="text-right">
           <button
             onClick={() => updateRequest({id: user_id, status: "approved"})}
             className="
@@ -32,10 +34,10 @@ export default function RequestCard({ fullname, user_id, status }: Props) {
           >
             Approve
           </button>
-        </td>
-        <td className="px-6 py-4 text-right">
+        </TableCell>
+        <TableCell className="text-right">
           <button
-            onClick={() => updateRequest({id: user_id, status: "denied"})}
+            onClick={() => updateRequest({ id: user_id, status: "denied" })}
             className="
             w-full bg-gradient-to-r 
             from-red-400 to-orange-500 
@@ -44,8 +46,21 @@ export default function RequestCard({ fullname, user_id, status }: Props) {
           >
             Deny
           </button>
-        </td>
-      </tr>
+        </TableCell>
+        <TableCell className="cursor-pointer text-right">
+          {!copied ? (
+            <Clipboard onClick={() => {
+              navigator.clipboard.writeText(user_id)
+              setCopied(true)
+              setTimeout(() => {
+                setCopied(false);
+              }, 1000)
+            }} />
+          ): (
+            <Check />
+          )}
+        </TableCell>
+      </TableRow>
     </>
   );
 }

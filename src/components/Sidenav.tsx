@@ -16,6 +16,7 @@ import { BarChart3, Package, UserCircle } from "lucide-react";
 import { useAuthStore } from "@/store/auth/auth.store";
 import { redirect, usePathname } from "next/navigation";
 import useHasMounted from "@/hooks/hasMounted";
+import Image from "next/image";
 
 interface SideBarProps {
   icon: JSX.Element;
@@ -76,7 +77,7 @@ export default function SideNav() {
           <h3 className="overflow-hidden ">Meetings</h3>
           <button
             onClick={() => toggleMenu()}
-            className="p-1.5 rounded-lg bg-gray-50 hover:bg-gray-100"
+            className="p-1.5 rounded-lg bg-gray-50 hover:bg-green-100"
           >
             {isSideNavOpen ? <ChevronFirst /> : <ChevronLast />}
           </button>
@@ -125,9 +126,10 @@ export default function SideNav() {
 
         {user && (
           <div className="border-t flex p-3">
-            <img
+            <Image
               src="https://ui-avatars.com/api/?background=ffdd44&color=1130a3&bold=true"
               className="w-10 h-10 rounded-md"
+              alt="avatars"
             />
 
             <div
@@ -155,7 +157,7 @@ export function SidebarItem({ icon, text, alert, url, action }: SideBarProps) {
   const isSideNavOpen = useUIStore((state) => state.isSideNavOpen);
   const activeClass =
     pathname === url
-      ? "bg-gradient-to-tr from-gray-200 to-blue-100 text-gray-800"
+      ? "bg-gradient-to-tr from-gray-200 to-green-400 text-gray-800"
       : "";
   console.log();
 
@@ -166,7 +168,7 @@ export function SidebarItem({ icon, text, alert, url, action }: SideBarProps) {
             ${activeClass}
             relative flex items-center py-2 px-3 my-1 
             font-medium rounded-md cursor-pointer transition-colors group
-            hover:bg-yellow-50 text-gray-600
+            hover:bg-green-200 text-gray-600
         `}
       >
         {icon}
@@ -187,7 +189,7 @@ export function SidebarItem({ icon, text, alert, url, action }: SideBarProps) {
           <div
             className={`
             absolute left-full rounded-md px-2 py-1 ml-6
-            bg-yellow-100 text-indigo-800 text-sm invisible
+            bg-green-200 text-indigo-800 text-sm invisible
             opacity-20 -translate-x-3  
             group-hover:visible group-hover:opacity-100 group-hover:translate-x-0
             `}

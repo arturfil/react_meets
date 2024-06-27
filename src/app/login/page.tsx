@@ -70,7 +70,7 @@ export default function Login() {
               />
             </div>
 
-            <button className="w-full bg-gradient-to-r from-cyan-500 to-blue-500 text-white p-2 rounded-xl hover:bg-green-600 focus:outline-none">
+            <button className="w-full bg-gradient-to-r from-green-300 to-green-500 text-white p-2 rounded-xl hover:bg-green-600 focus:outline-none">
               Login
             </button>
 

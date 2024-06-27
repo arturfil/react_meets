@@ -5,65 +5,67 @@ import { useRequestStore } from "@/store/requests/requests.store";
 import RequestCard from "@/components/RequestCard";
 import React, { useEffect } from "react";
 import { Request } from "@/interfaces/Request";
+import {
+  Table,
+  TableBody,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 
- function Requests() {
+function Requests() {
   const requests = useRequestStore((state) => state.requests);
   const getAllRequests = useRequestStore((state) => state.getAllRequests);
 
   useEffect(() => {
     getAllRequests();
-  }, []);
+  }, [getAllRequests]);
 
   return (
-    <div className="mt-16 ml-10">
+    <div className="mt-16">
       <h2 className="font-bold text-5xl my-5">Teacher Requests</h2>
       {requests ? (
-          <RequestsTable requests={requests}/>
+        <RequestsTable requests={requests} />
       ) : (
-        <h2 className="font-bold text-xl my-5">Server Trying to reach requests</h2>
+        <h2 className="font-bold text-xl my-5">
+          Server Trying to reach requests
+        </h2>
       )}
     </div>
   );
 }
 
-
 interface TableProps {
-    requests: Request[]
+  requests: Request[];
 }
 
-export function RequestsTable({requests}: TableProps) {
+export function RequestsTable({ requests }: TableProps) {
   return (
-      <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-        <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-          <thead className="text-xs text-gray-700 uppercase bg-white-100 dark:bg-gray-500 dark:text-gray-100">
-            <tr>
-              <th scope="col" className="px-6 py-3">
-                User
-              </th>
-              <th scope="col" className="px-6 py-3">
-               ID 
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Status
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Approve
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Deny
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {requests &&
-              requests.length > 0 &&
-              requests.map((r) => (
-                <RequestCard key={r.id} fullname={`${r.first_name} ${r.last_name}`} user_id={r.id} status={r.status} />
-              ))}
-          </tbody>
-        </table>
-      </div>
-  )
+    <div className="flex mx-auto">
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead className="w-[100px]">ID</TableHead>
+            <TableHead className="">User</TableHead>
+            <TableHead>Status</TableHead>
+            <TableHead className="text-right">Approve</TableHead>
+            <TableHead className="text-right">Deny</TableHead>
+            <TableHead className="">Copy ID</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {requests.map((request) => (
+            <RequestCard
+              key={request.id}
+              user_id={request.id}
+              status={request.status}
+              fullname={`${request.first_name} ${request.last_name}`}
+            />
+          ))}
+        </TableBody>
+      </Table>
+    </div>
+  );
 }
 
 export default AuthGuard(Requests);
