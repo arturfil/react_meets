@@ -5,9 +5,11 @@ interface Props {
   setSearchOption: Function;
 }
 
+type RadioType = "default" | "secondary" | "destructive" | "outline" | null | undefined;
+
 export default function RadioSearchGroup({ searchOption, setSearchOption }: Props) {
-  let teachersBadge: string = searchOption === "Teacher" ? "default" : "variant";
-  let subjectsBadge: string = searchOption === "Subject" ? "default" : "variant";
+  let teachersBadge: RadioType = searchOption === "Teacher" ? "default" : null; 
+  let subjectsBadge: RadioType = searchOption === "Subject" ? "default" : null;
 
   return (
     <div className="justify-center gap-3 flex flox-col">

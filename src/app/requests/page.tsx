@@ -39,7 +39,7 @@ interface TableProps {
   requests: Request[];
 }
 
-export function RequestsTable({ requests }: TableProps) {
+function RequestsTable({ requests }: TableProps) {
   return (
     <div className="flex mx-auto">
       <Table>

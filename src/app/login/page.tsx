@@ -77,7 +77,7 @@ export default function Login() {
             <div className="mt-4">
               <Link href="/signup" className=""
               >
-                If you don't have an account yet click here
+                If you don&apos;t have an account yet click here
               </Link>
             </div>
         </form>
