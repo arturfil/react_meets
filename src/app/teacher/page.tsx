@@ -2,11 +2,14 @@
 
 import AuthGuard from "@/components/AuthGuard";
 import { Button } from "@/components/ui/button";
+import { useAuthStore } from "@/store/auth/auth.store";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
 function TeacherPage() {
+  const user = useAuthStore(state => state.user); 
+
   return (
     <div className="mt-16 m-10">
 
@@ -15,6 +18,11 @@ function TeacherPage() {
         width={600} height={400} alt="tutors" 
      />
 
+      {user?.roles? (
+        <h2 className="font-bold text-2xl w-8/12 p-4 mx-auto bg-green-200 rounded-md">
+            Welcome!
+        </h2>
+      ) : (
       <div className="flex flex-col">
         <h2 className="font-bold text-2xl w-8/12 p-4 mx-auto bg-green-200 rounded-md">
           If you want to teach courses first create a user account and then
@@ -32,6 +40,7 @@ function TeacherPage() {
           <Link href="/requests/createrequests">Request Access</Link>
         </Button>
       </div>
+     )}
     </div>
   );
 }

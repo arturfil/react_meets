@@ -16,7 +16,6 @@ export interface AuthState {
   logoutUser: () => void;
   isLoggedIn: () => boolean;
   getTeachers: () => Promise<void>;
-  getUserById: (id: string) => Promise<void>;
   getUserByToken: () => Promise<void>;
 }
 
@@ -24,6 +23,7 @@ const storeApi: StateCreator<AuthState> = (set, get) => ({
   status: "pending",
   token: undefined,
   user: undefined,
+  isAdmin: undefined,
   teachers: [],
   error: undefined,
 
@@ -84,12 +84,6 @@ const storeApi: StateCreator<AuthState> = (set, get) => ({
     }
   },
 
-  getUserById: async (id: string) => {
-    try {
-      let user = await fetch(`http://locahost:8080/api/v1/users/${id}`);
-    } catch (error) {}
-  },
-
   getUserByToken: async () => {
     let token: string = JSON.parse(localStorage.getItem("meetings_tk")!)!;
     try {
@@ -100,6 +94,7 @@ const storeApi: StateCreator<AuthState> = (set, get) => ({
       }).then(res => res.json());
 
       set({user: user})
+
     } catch (error) {
         console.log(error)
     }
@@ -107,5 +102,5 @@ const storeApi: StateCreator<AuthState> = (set, get) => ({
 });
 
 export const useAuthStore = create<AuthState>()(
-  devtools(storeApi, { name: "auth-store" }),
+  devtools(persist(storeApi, { name: "auth-store" })),
 );

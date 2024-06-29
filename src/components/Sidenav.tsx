@@ -10,6 +10,8 @@ import {
   UserRoundPlus,
   ScrollText,
   UserRound,
+  CircleIcon,
+  CircleUserRound,
 } from "lucide-react";
 import Link from "next/link";
 import { BarChart3, Package, UserCircle } from "lucide-react";
@@ -61,7 +63,7 @@ export default function SideNav() {
   const isLoggedIn = useAuthStore((state) => state.isLoggedIn());
   const logoutUser = useAuthStore((state) => state.logoutUser);
 
-  const user = null;
+  const user = useAuthStore(state => state.user);
   const isSideNavOpen = useUIStore((state) => state.isSideNavOpen);
   const toggleMenu = useUIStore((state) => state.toggleSideNav);
 
@@ -124,29 +126,6 @@ export default function SideNav() {
           </ul>
         )}
 
-        {user && (
-          <div className="border-t flex p-3">
-            <Image
-              src="https://ui-avatars.com/api/?background=ffdd44&color=1130a3&bold=true"
-              className="w-10 h-10 rounded-md"
-              alt="avatars"
-            />
-
-            <div
-              className={`
-                flex justify-between items-center 
-                overflow-hidden ${isSideNavOpen ? "w-52 ml-3" : "w-0"}
-            `}
-            >
-              <div className="leading-4">
-                <h4 className="font-semibold">John Doe</h4>
-                <span className="text-xs text-gray-600">john@doe.com</span>
-              </div>
-
-              <MoreVertical size={20} />
-            </div>
-          </div>
-        )}
       </nav>
     </aside>
   );
@@ -157,7 +136,7 @@ export function SidebarItem({ icon, text, alert, url, action }: SideBarProps) {
   const isSideNavOpen = useUIStore((state) => state.isSideNavOpen);
   const activeClass =
     pathname === url
-      ? "bg-gradient-to-tr from-gray-200 to-green-400 text-gray-800"
+      ? "bg-primary text-white"
       : "";
   console.log();
 
