@@ -24,7 +24,7 @@ const storeApi: StateCreator<MeetingsState> = (set) => ({
   getMeetings: async () => {
     try {
       let token = JSON.parse(localStorage.getItem("meetings_tk")!);
-          const meetings: any = await fetch( "http://localhost:8080/api/v1/meetings", {
+          const meetings: any = await fetch(process.env.NEXT_PUBLIC_API_URL + "/meetings", {
           headers: {
             Authorization: "Bearer " + token,
           },
@@ -42,7 +42,7 @@ const storeApi: StateCreator<MeetingsState> = (set) => ({
   createMeeting: async (selection: MeetingSubmission) => {
     try {
       let token = JSON.parse(localStorage.getItem("meetings_tk")!);
-      await fetch("http://localhost:8080/api/v1/meetings/create", {
+      await fetch(process.env.NEXT_PUBLIC_API_URL + "/meetings/create", {
         method: "POST",
         body: JSON.stringify(selection),
         headers: {

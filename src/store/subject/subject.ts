@@ -15,7 +15,7 @@ const storeApi: StateCreator<SubjectState> = (set) => ({
 
     getSubjects: async () => {
         try {
-            const subjects: any = await fetch("http://localhost:8080/api/v1/subjects")
+            const subjects: any = await fetch(process.env.NEXT_PUBLIC_API_URL + "/subjects")
                 .then(res => res.json())
             set({ subjects })
         } catch (error) {

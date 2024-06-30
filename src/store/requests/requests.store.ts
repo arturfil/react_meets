@@ -19,7 +19,7 @@ const storeApi: StateCreator<RequestsState> = (set, get) => ({
   getAllRequests: async () => {
     try {
         
-    const requests = await fetch("http://localhost:8080/api/v1/requests")
+    const requests = await fetch(process.env.NEXT_PUBLIC_API_URL + "/requests")
             .then(res => res.json())
     console.log(requests)
     set({requests})
@@ -31,7 +31,7 @@ const storeApi: StateCreator<RequestsState> = (set, get) => ({
 
   createRequest: async (request: Request) => {
     try {
-      await fetch("http://localhost:8080/api/v1/requests/create", {
+      await fetch(process.env.NEXT_PUBLIC_API_URL + "/requests/create", {
         method: "POST",
         body: JSON.stringify(request),
       });
@@ -45,7 +45,7 @@ const storeApi: StateCreator<RequestsState> = (set, get) => ({
     try {
 
         let token = JSON.parse(localStorage.getItem("meetings_tk")!);
-        await fetch("http://localhost:8080/api/v1/request/update", {
+        await fetch(process.env.NEXT_PUBLIC_API_URL + "/request/update", {
             method: "PUT",
             body: JSON.stringify(request),
             headers: {

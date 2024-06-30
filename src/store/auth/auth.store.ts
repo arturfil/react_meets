@@ -2,7 +2,7 @@ import { ErrorLoginResponse } from "@/interfaces/Error";
 import { RegisterUser, User } from "@/interfaces/User";
 import { toast } from "react-toastify";
 import { StateCreator, create } from "zustand";
-import { devtools, persist } from "zustand/middleware";
+import { devtools } from "zustand/middleware";
 
 export interface AuthState {
   status: string;
@@ -29,7 +29,7 @@ const storeApi: StateCreator<AuthState> = (set, get) => ({
 
   loginUser: async (email: string, password: string) => {
     try {
-      let data = await fetch("http://localhost:8080/api/v1/login", {
+      let data = await fetch(process.env.NEXT_PUBLIC_API_URL + "/login", {
         method: "POST",
         body: JSON.stringify({ email, password }),
       }).then((res) => res.json());
@@ -54,7 +54,7 @@ const storeApi: StateCreator<AuthState> = (set, get) => ({
   },
 
   signUpUser: async (user: RegisterUser) => {
-    let response = await fetch("http://localhost:8080/api/v1/signup", {
+    let response = await fetch(process.env.NEXT_PUBLIC_API_URL + "/signup", {
         method: "POST",
         body: JSON.stringify(user)
     }).then(res => res.json());
@@ -75,7 +75,8 @@ const storeApi: StateCreator<AuthState> = (set, get) => ({
 
   getTeachers: async () => {
     try {
-      let data = await fetch("http://localhost:8080/api/v1/teachers").then(
+
+      let data = await fetch(process.env.NEXT_PUBLIC_API_URL+ "/teachers").then(
         (res) => res.json(),
       );
       set({ teachers: data });
@@ -87,7 +88,7 @@ const storeApi: StateCreator<AuthState> = (set, get) => ({
   getUserByToken: async () => {
     let token: string = JSON.parse(localStorage.getItem("meetings_tk")!)!;
     try {
-      let user: any = await fetch(`http://localhost:8080/api/v1/users/bytoken`, {
+      let user: any = await fetch(process.env.NEXT_PUBLIC_API_URL + '/users/bytoken', {
         headers: {
           Authorization: "Bearer " + token,
         },
@@ -102,5 +103,5 @@ const storeApi: StateCreator<AuthState> = (set, get) => ({
 });
 
 export const useAuthStore = create<AuthState>()(
-  devtools(persist(storeApi, { name: "auth-store" })),
+  devtools(storeApi, { name: "auth-store" }),
 );
