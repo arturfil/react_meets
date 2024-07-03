@@ -4,21 +4,17 @@ import { useUIStore } from "@/store/ui/ui-store";
 import {
   ChevronFirst,
   ChevronLast,
-  MoreVertical,
   BookCheck,
   LogOut,
   UserRoundPlus,
   ScrollText,
   UserRound,
-  CircleIcon,
-  CircleUserRound,
 } from "lucide-react";
 import Link from "next/link";
 import { BarChart3, Package, UserCircle } from "lucide-react";
 import { useAuthStore } from "@/store/auth/auth.store";
 import { redirect, usePathname } from "next/navigation";
 import useHasMounted from "@/hooks/hasMounted";
-import Image from "next/image";
 
 interface SideBarProps {
   icon: JSX.Element;

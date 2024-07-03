@@ -2,7 +2,7 @@ import { ErrorLoginResponse } from "@/interfaces/Error";
 import { RegisterUser, User } from "@/interfaces/User";
 import { toast } from "react-toastify";
 import { StateCreator, create } from "zustand";
-import { devtools } from "zustand/middleware";
+import { devtools, persist } from "zustand/middleware";
 
 export interface AuthState {
   status: string;
@@ -103,5 +103,5 @@ const storeApi: StateCreator<AuthState> = (set, get) => ({
 });
 
 export const useAuthStore = create<AuthState>()(
-  devtools(storeApi, { name: "auth-store" }),
+  devtools(persist(storeApi, { name: "auth-store" })),
 );
