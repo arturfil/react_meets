@@ -19,8 +19,8 @@ jobs:
           host: ${{ secrets.EC2_HOST }}
           username: ubuntu
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source: ./.github/workflows/deploy.sh
-          target: /home/ubuntu/deploy.sh
+          source: deploy.sh
+          target: /home/ubuntu/.
 
       - name: SSH Into EC2 and run script
         uses: appleboy/ssh-action@master
