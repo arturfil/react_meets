@@ -18,7 +18,7 @@ jobs:
     
       - name: Run deployment script
         run: |
-          scp -o StrictHostKeyChecking=no deploy.sh ubuntu@{{ secrets.EC2_HOST }}:/home/ubuntu/deploy.sh
-          ssh -o StrictHostKeyChecking=no ubuntu@{{ secrets.EC2_HOST }} 'chmod +x /home/ubuntu/deploy.sh && /home/ubuntu/deploy.sh'
+          scp -o StrictHostKeyChecking=no deploy.sh ubuntu@${{ secrets.EC2_HOST }}:/home/ubuntu/deploy.sh
+          ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_HOST }} 'chmod +x /home/ubuntu/deploy.sh && /home/ubuntu/deploy.sh'
 
 
