@@ -24,8 +24,8 @@ jobs:
       - name: Build Next.js app
         run: npm run build
 
-      - name: Export static files
-        run: npm run export
+      # - name: Export static files
+      #   run: npm run export
 
       - name: Archive production artifacts
         run: tar -czf out.tar.gz out
