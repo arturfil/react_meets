@@ -15,7 +15,7 @@ export default function Requests() {
   function handleRequest() {
     console.log(user);
     if (!user || !user.id) return;
-    createRequest({id: user?.id, status: "pending"})
+    createRequest({id: user?.id, status: "pending", type: "teach request"})
     router.push("/");
   }
 
