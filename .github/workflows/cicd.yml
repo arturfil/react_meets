@@ -26,6 +26,5 @@ jobs:
         run: ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
 
       - name: Run deployment script on EC2
-        run: | 
-          ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_HOST }} 'bash /home/ubuntu/deploy.sh'
+        run: ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ubuntu@${{ secrets.EC2_HOST }} 'bash /home/ubuntu/deploy.sh'
 
