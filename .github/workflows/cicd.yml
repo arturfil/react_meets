@@ -1,31 +1,62 @@
-name: Deploy Nextjs App to EC2
+name: Deploy Next.js App to EC2
 
-on: 
+on:
   push:
     branches:
       - main
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Install SSH Client
-        run: sudo apt-get install -y openssh-client
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
 
-      - name: Add SSH key
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
-          chmod 600 ~/.ssh/id_ed25519
+      - name: Install dependencies
+        run: npm install
 
-      # - name: Add the EC2 host to known hosts
-    
-      - name: Run deployment script
+      - name: Build Next.js app
+        run: npm run build
+
+      - name: Export static files
+        run: npm run export
+
+      - name: Archive production artifacts
+        run: tar -czf out.tar.gz out
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: out
+          path: out.tar.gz
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download build artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: out
+
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Copy files via SCP
         run: |
-          scp -o StrictHostKeyChecking=no deploy.sh ubuntu@${{ secrets.EC2_HOST }}:/home/ubuntu/deploy.sh
-          ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_HOST }} 'chmod +x /home/ubuntu/deploy.sh && /home/ubuntu/deploy.sh'
+          scp -o StrictHostKeyChecking=no out.tar.gz ubuntu@${{ secrets.EC2_HOST }}:/home/ubuntu/
+          ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_HOST }} 'tar -xzf /home/ubuntu/out.tar.gz -C /var/www/html'
+
+      - name: Clean up build artifact on EC2
+        run: ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_HOST }} 'rm /home/ubuntu/out.tar.gz'
+
 
