@@ -15,6 +15,14 @@ jobs:
 
       - name: Install SSH Client
         run: sudo apt-get install -y openssh-client
+
+      - name: Add SSH key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+
+      # - name: Add the EC2 host to known hosts
     
       - name: Run deployment script
         run: |
