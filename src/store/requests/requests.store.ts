@@ -8,6 +8,7 @@ interface RequestsState {
   request: Request | null;
 
   getAllRequests: () => Promise<void>;
+  getRequestById: (id: string) => Promise<void>;
   createRequest: (request: Request) => Promise<void>;
   updateRequest: (request: Request) => Promise<void>;
 }
@@ -26,6 +27,17 @@ const storeApi: StateCreator<RequestsState> = (set, get) => ({
 
     } catch (error) {
         console.log(error);
+    }
+  },
+
+  getRequestById: async (id: string) => {
+    try {
+       const requestById:any = await fetch(process.env.NEXT_PUBLIC_API_URL + "/requests/" + id).then(res => res.json());
+        console.log("req payload", requestById)
+        set({request: requestById});
+       
+    } catch (error) {
+       console.log(error);
     }
   },
 

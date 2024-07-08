@@ -2,21 +2,34 @@
 
 import AuthGuard from "@/components/AuthGuard";
 import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
-import { User } from "@/interfaces/User";
 import { useAuthStore } from "@/store/auth/auth.store";
-import { CircleUserIcon, CircleUserRound, Pencil } from "lucide-react";
+import { useRequestStore } from "@/store/requests/requests.store";
+import { Pencil } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect } from "react";
 
 function TeacherPage() {
   const user = useAuthStore((state) => state.user);
+  const getUserByToken = useAuthStore(state => state.getUserByToken);
+
+  const getRequestById = useRequestStore((state) => state.getRequestById);
+  const request = useRequestStore((state) => state.request);
+
+  useEffect(() => {
+    getUserByToken();
+  }, [getUserByToken])
+
+  useEffect(() => {
+    if (!user || !user.id) return;
+    getRequestById(user?.id);
+
+  }, [getRequestById, user]);
 
   return (
     <div className="mt-16 m-10">
       {user?.roles?.includes("teacher") ? (
-        <Profile props={user} />
+        <Profile />
       ) : (
         <div className="flex flex-col">
           <Image
@@ -39,12 +52,16 @@ function TeacherPage() {
             verification process is completed or get in contact with support.
           </h2>
 
-          <Button
-            asChild
-            className="mt-5 w-[200px] flex justify-center mx-auto"
-          >
-            <Link href="/requests/createrequests">Request Access</Link>
-          </Button>
+          {request ? (
+            <h2 className="flex justify-center mt-5 text-lg font-bold">Your request has been sent already!</h2>
+          ) : (
+            <Button
+              asChild
+              className="mt-5 w-[200px] flex justify-center mx-auto"
+            >
+              <Link href="/requests/createrequests">Request Access</Link>
+            </Button>
+          )}
         </div>
       )}
     </div>
@@ -69,11 +86,14 @@ function Profile() {
           <div className="flex space-x-1">
             <ul>{user?.roles?.map((r) => <li key={r}>{r}</li>)}</ul>
           </div>
-          <Button asChild className="w-[100px]" variant="outline">
+          <h2 className="w-[100px] text-primary" >
+            Request new roles
+          {/*
             <Link href="/teacher/addSubject">
               Edit <Pencil className="ml-4" />
             </Link>
-          </Button>
+          */}
+          </h2>
         </div>
         <hr className="border-gray-400 my-2" />
         <div className="grid grid-cols-3">
@@ -94,7 +114,7 @@ function Profile() {
           <h2>Subjects Taught</h2>
           <p>Test</p>
           <Button asChild className="w-[100px]" variant="outline">
-            <Link href="/teacher/addSubject">
+            <Link href="/teacher/edit">
               Edit <Pencil className="ml-4" />
             </Link>
           </Button>

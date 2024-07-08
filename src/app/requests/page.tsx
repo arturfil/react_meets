@@ -47,6 +47,7 @@ function RequestsTable({ requests }: TableProps) {
           <TableRow>
             <TableHead className="w-[100px]">ID</TableHead>
             <TableHead className="">User</TableHead>
+            <TableHead>Type</TableHead>
             <TableHead>Status</TableHead>
             <TableHead className="text-right">Approve</TableHead>
             <TableHead className="text-right">Deny</TableHead>
@@ -57,9 +58,7 @@ function RequestsTable({ requests }: TableProps) {
           {requests.map((request) => (
             <RequestCard
               key={request.id}
-              user_id={request.id}
-              status={request.status}
-              fullname={`${request.first_name} ${request.last_name}`}
+              {...request}
             />
           ))}
         </TableBody>

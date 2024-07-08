@@ -1,17 +1,22 @@
 "use client"
 
+import { Button } from "@/components/ui/button";
 import { useAuthStore } from "@/store/auth/auth.store";
 import { useRequestStore } from "@/store/requests/requests.store";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 export default function Requests() {
   const createRequest = useRequestStore(state => state.createRequest);
   const user = useAuthStore(state => state.user)
 
+  const router = useRouter();
+
   function handleRequest() {
     console.log(user);
     if (!user || !user.id) return;
     createRequest({id: user?.id, status: "pending"})
+    router.push("/");
   }
 
   return (
@@ -33,10 +38,9 @@ export default function Requests() {
 
       <div className="mt-5">
         <h2 className="font-bold text-lg">Make request</h2>
-        <button onClick={handleRequest} 
-            className="mt-5 text-white text-sm bg-orange-600 px-3 py-1 rounded-lg">
-          Create Request
-        </button>
+        <Button className="h-[30px] mt-2" onClick={handleRequest}>
+            Create Reqeuset
+        </Button>
       </div>
     </div>
   );

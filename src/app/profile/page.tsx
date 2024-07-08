@@ -2,10 +2,15 @@
 
 import AuthGuard from "@/components/AuthGuard";
 import { useAuthStore } from "@/store/auth/auth.store";
-import React from "react";
+import React, { useEffect } from "react";
 
 function Profile() {
   const user = useAuthStore((state) => state.user);
+  const getUserByToken = useAuthStore((state) => state.getUserByToken);
+
+  useEffect(() => {
+   getUserByToken(); 
+  }, [getUserByToken])
 
   return (
     <div className="mt-16 ml-10">
