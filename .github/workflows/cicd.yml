@@ -17,7 +17,7 @@ jobs:
         uses: appleboy/scp-action@master
         with:
           host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.EC2_USERNAME }}
+          username: ubuntu
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           source: ./.github/workflows/deploy.sh
           target: /home/ubuntu/deploy.sh
