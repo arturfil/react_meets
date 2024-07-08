@@ -4,13 +4,10 @@ PM2_APP_NAME=next
 
 cd $REPO_DIR
 
-git pulll origin main
+git pull origin main
 
 npm install
 
 npm run build
 
 pm2 restart $PM2_APP_NAME
-
-pm2 save
-pm2 startup
