@@ -39,18 +39,12 @@ const pages = [
     icon: <BookCheck size={20} />,
     text: "Teacher",
   },
-  {
-    alert: false,
-    url: "/requests",
-    icon: <ScrollText size={20} />,
-    text: "Requests",
-  },
-  {
+  /*{
     alert: false,
     url: "/profile",
     icon: <UserRound size={20} />,
     text: "Profile",
-  },
+  },*/
 ];
 
 export default function SideNav() {
@@ -92,6 +86,16 @@ export default function SideNav() {
                 alert={page.alert}
               />
             ))}
+
+            { user && user.roles && user?.roles?.includes("admin") && (
+              <SidebarItem
+                key={"requests"}
+                url="/requests"
+                icon={<ScrollText size={20}/>}
+                text="Requests"
+                alert={false}
+              />
+            )}
 
             {isLoggedIn ? (
               <SidebarItem

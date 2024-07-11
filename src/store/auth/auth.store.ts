@@ -11,7 +11,7 @@ export interface AuthState {
   teachers: User[];
   error: ErrorLoginResponse | undefined;
 
-  loginUser: (email: string, password: string) => Promise<void>;
+  loginUser: (email: string, password: string) => Promise<"success" | undefined>;
   signUpUser: (user: RegisterUser) => Promise<void>;
   logoutUser: () => void;
   isLoggedIn: () => boolean;
@@ -34,19 +34,20 @@ const storeApi: StateCreator<AuthState> = (set, get) => ({
         body: JSON.stringify({ email, password }),
       }).then((res) => res.json());
 
-      console.log("data", data);
-    
       if (data.error) {
             set({error: data});
+            setTimeout(() =>{ 
+              set({error: undefined})
+            }, 4000)
             return; 
-       }
+      }
 
       localStorage.setItem("meetings_tk", JSON.stringify(data.token));
       set({ token: data.token, status: "authenticated" });
       toast.success("Logged In!", { theme: "colored" });
 
-      // getUserInfo()
       get().getUserByToken();
+      return "success";
 
     } catch (error) {
       console.log(error);
@@ -54,17 +55,16 @@ const storeApi: StateCreator<AuthState> = (set, get) => ({
   },
 
   signUpUser: async (user: RegisterUser) => {
-    let response = await fetch(process.env.NEXT_PUBLIC_API_URL + "/signup", {
+    await fetch(process.env.NEXT_PUBLIC_API_URL + "/signup", {
         method: "POST",
         body: JSON.stringify(user)
-    }).then(res => res.json());
-
-    console.log("response signup", response);
+    });
   },
 
   logoutUser: () => {
     toast.info("Loged Out!", { theme: "colored" });
     localStorage.removeItem("meetings_tk");
+    set({error: undefined})
   },
 
   isLoggedIn: () => {
@@ -103,5 +103,5 @@ const storeApi: StateCreator<AuthState> = (set, get) => ({
 });
 
 export const useAuthStore = create<AuthState>()(
-  devtools(persist(storeApi, { name: "auth-store" })),
+  devtools(storeApi, { name: "auth-store" }),
 );

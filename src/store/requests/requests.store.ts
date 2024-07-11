@@ -32,12 +32,14 @@ const storeApi: StateCreator<RequestsState> = (set, get) => ({
 
   getRequestById: async (id: string) => {
     try {
-       const requestById:any = await fetch(process.env.NEXT_PUBLIC_API_URL + "/requests/" + id).then(res => res.json());
-        console.log("req payload", requestById)
-        set({request: requestById});
+       const response:any = await fetch(process.env.NEXT_PUBLIC_API_URL + "/requests/" + id).then(res => res.json());
+        console.log("req payload", response)
+        if (response.error) return; 
+        set({request: response});
        
     } catch (error) {
        console.log(error);
+    
     }
   },
 

@@ -4,7 +4,7 @@ import AuthGuard from "@/components/AuthGuard";
 import { Calendar } from "@/components/ui/calendar";
 import { useAuthStore } from "@/store/auth/auth.store";
 import { useMeetingStore } from "@/store/meetings/meetings.store";
-import { useSubjectStore } from "@/store/subject/subject";
+import { useSubjectStore } from "@/store/subject/subject.store";
 import React from "react";
 import { useEffect, useState, MouseEvent } from "react";
 

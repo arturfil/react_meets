@@ -6,7 +6,7 @@ import SearchComponent from "@/components/SearchComponent";
 import SubjectCard from "@/components/SubjectCard";
 import UserCard from "@/components/UserCard";
 import { useAuthStore } from "@/store/auth/auth.store";
-import { useSubjectStore } from "@/store/subject/subject";
+import { useSubjectStore } from "@/store/subject/subject.store";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 

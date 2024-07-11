@@ -20,68 +20,71 @@ export default function Login() {
     };
 
     try {
-        await loginUser(email.value, password.value)
-        email.value = ""
-        password.value = ""
+      const response = await loginUser(email.value, password.value);
+      email.value = "";
+      password.value = "";
+      if (response === "success") {
         router.push("/");
+      }
     } catch (error) {
-        
+      console.log(error);
     }
-
   }
 
   return (
     <div className="mt-20">
       <div className="w-96 p-8 bg-gray-100 rounded-xl shadow h-[500px]">
-
         <h2 className="text-2xl mb-6 font-bold justify-center flex">Login</h2>
 
-        {loginResponse && loginResponse.error ? <h2>{loginResponse.message}</h2> : ""} 
+        {loginResponse && loginResponse.error ? (
+          <div className="text-red-400 border-red-400 border-[1px] rounded-md mb-2 p-5">
+            <h2>{loginResponse.message}</h2>
+          </div>
+        ) : (
+          ""
+        )}
 
         <form onSubmit={handleLogin}>
+          <div className="mb-4">
+            <label
+              className="block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="email"
+            >
+              Email
+            </label>
+            <input
+              type="text"
+              name="email"
+              className="w-full p-2 border rounded-xl focus:outline-none focus:border-blue-500"
+              placeholder="Enter your email"
+            />
+          </div>
 
-            <div className="mb-4">
-              <label
-                className="block text-gray-700 text-sm font-bold mb-2"
-                htmlFor="email"
-              >
-                Email
-              </label>
-              <input
-                type="text"
-                name="email"
-                className="w-full p-2 border rounded-xl focus:outline-none focus:border-blue-500"
-                placeholder="Enter your email"
-              />
-            </div>
+          <div className="mb-4">
+            <label
+              className="block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="password"
+            >
+              Password
+            </label>
+            <input
+              name="password"
+              type="password"
+              className="w-full p-2 border rounded-xl focus:outline-none focus:border-blue-500 mb-2"
+              placeholder="Enter your password"
+            />
+          </div>
 
-            <div className="mb-4">
-              <label
-                className="block text-gray-700 text-sm font-bold mb-2"
-                htmlFor="password"
-              >
-                Password
-              </label>
-              <input
-                name="password"
-                type="password"
-                className="w-full p-2 border rounded-xl focus:outline-none focus:border-blue-500 mb-2"
-                placeholder="Enter your password"
-              />
-            </div>
+          <button className="w-full bg-gradient-to-r from-green-300 to-green-500 text-white p-2 rounded-xl hover:bg-green-600 focus:outline-none">
+            Login
+          </button>
 
-            <button className="w-full bg-gradient-to-r from-green-300 to-green-500 text-white p-2 rounded-xl hover:bg-green-600 focus:outline-none">
-              Login
-            </button>
-
-            <div className="mt-4">
-              <Link href="/signup" className=""
-              >
-                If you don&apos;t have an account yet click here
-              </Link>
-            </div>
+          <div className="mt-4">
+            <Link href="/signup" className="text-blue-500">
+              If you don&apos;t have an account yet click here
+            </Link>
+          </div>
         </form>
-
       </div>
     </div>
   );

@@ -15,7 +15,7 @@ export default function AuthGuard(Component: React.FC<any>) { // remember to cha
             if (!isLoggedIn) {
                 redirect("/login")
             }
-        }, [])
+        }, [isLoggedIn])
 
         if (!hasMounted) return null;
 

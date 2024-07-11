@@ -26,6 +26,7 @@ export default function Signup() {
     const {confirm_password,  ...obj} = user;
     signUpUser(obj); 
     router.push("/")
+    toast.success("successfully signed up!")
   }
 
   return (
