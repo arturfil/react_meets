@@ -23,7 +23,7 @@ function Requests() {
   }, [getAllRequests]);
 
   return (
-    <div className="mt-16 mb-10">
+    <div className="mt-16 mb-10 h-full">
       <div className="flex">
         <h2 className="font-bold text-5xl text-center justify-center my-5">
           Teacher Requests
