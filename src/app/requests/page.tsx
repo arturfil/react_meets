@@ -12,6 +12,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import MobileTableCard from "@/components/MobileTableCard";
 
 function Requests() {
   const requests = useRequestStore((state) => state.requests);
@@ -22,8 +23,12 @@ function Requests() {
   }, [getAllRequests]);
 
   return (
-    <div className="mt-16 max-h-[700px]">
-      <h2 className="font-bold text-5xl my-5">Teacher Requests</h2>
+    <div className="mt-16 mb-10">
+      <div className="flex">
+        <h2 className="font-bold text-5xl text-center justify-center my-5">
+          Teacher Requests
+        </h2>
+      </div>
       {requests ? (
         <RequestsTable requests={requests} />
       ) : (
@@ -41,8 +46,8 @@ interface TableProps {
 
 function RequestsTable({ requests }: TableProps) {
   return (
-    <div className="flex mx-auto">
-      <Table>
+    <div className="">
+      <Table className="max-sm:hidden">
         <TableHeader>
           <TableRow>
             <TableHead className="w-[100px]">ID</TableHead>
@@ -60,6 +65,17 @@ function RequestsTable({ requests }: TableProps) {
           ))}
         </TableBody>
       </Table>
+      <div
+        className="grid grid-cols-1 
+                place-items-center sm:hidden 
+                md:hidden lg:hidden xl:hidden 2xl:hidden
+                w-full mx-auto justify-center
+"
+      >
+        {requests.map((request) => (
+          <MobileTableCard key={request.id} {...request} />
+        ))}
+      </div>
     </div>
   );
 }

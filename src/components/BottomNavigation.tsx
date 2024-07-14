@@ -10,7 +10,8 @@ export default function BottomNavigation() {
         bottom-0 left-0 right-0    
            container fixed w-full  border-t-2 z-10
            border-gray-300 h-10 justify-between pt-[20px] pb-[60px]
-           text-gray-500 bg-white flex sm:hidden md:hidden lg:hidden xl:hidden 2xl:hidden
+           text-gray-500 bg-white 
+            flex sm:hidden md:hidden lg:hidden xl:hidden 2xl:hidden
         "
     >
       <div className="flex bg-red-400 ">
