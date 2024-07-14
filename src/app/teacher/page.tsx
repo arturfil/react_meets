@@ -77,7 +77,7 @@ function Profile() {
       <div className="
             flex flex-col border-gray-400 sm:border-[1px] 
             md:border-[1px] lg:border-[1px] p-6 container 
-            w-[330px] sm:w-[500px] md:w-[600px] lg:w-[800px] 
+            w-[300px] sm:w-[500px] md:w-[600px] lg:w-[800px] 
             h-[600px] rounded-lg">
         <div className="grid sm:grid-cols-1 lg:grid-cols-3 md:grid-cols-3">
           <h2 className="font-semibold text-[40px]">
