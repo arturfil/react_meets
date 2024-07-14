@@ -32,7 +32,7 @@ function Home() {
   }, [getSubjects, getTeachers, getUserByToken]);
 
   return (
-    <div className="p-10 m-auto">
+    <div className="p-10 m-auto mb-10">
 
       <Hero/>
       <SearchComponent 

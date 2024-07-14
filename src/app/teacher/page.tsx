@@ -4,7 +4,7 @@ import AuthGuard from "@/components/AuthGuard";
 import { Button } from "@/components/ui/button";
 import { useAuthStore } from "@/store/auth/auth.store";
 import { useRequestStore } from "@/store/requests/requests.store";
-import { Pencil, Settings } from "lucide-react";
+import { Settings } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect } from "react";
@@ -74,7 +74,12 @@ function Profile() {
 
   return (
     <>
-      <div className="flex flex-col border-gray-400 border-[1px] p-6 container sm:w-[400px] md:w-[600px] lg:w-[800px] h-[600px] rounded-lg">
+      <div className="
+            flex flex-col border-gray-400 sm:border-[1px] 
+            md:border-[1px] lg:border-[1px] p-6 container 
+            w-[330px] sm:w-[500px] md:w-[600px] lg:w-[800px] 
+            h-[600px] rounded-lg"
+        >
         <div className="grid sm:grid-cols-1 lg:grid-cols-3 md:grid-cols-3">
           <h2 className="font-semibold text-[40px]">
             {user?.first_name} {user?.last_name}

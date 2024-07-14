@@ -22,7 +22,7 @@ function Requests() {
   }, [getAllRequests]);
 
   return (
-    <div className="mt-16">
+    <div className="mt-16 max-h-[700px]">
       <h2 className="font-bold text-5xl my-5">Teacher Requests</h2>
       {requests ? (
         <RequestsTable requests={requests} />

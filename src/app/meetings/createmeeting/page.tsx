@@ -78,7 +78,7 @@ function CreateMeetingPage() {
   };
 
   return (
-    <div className="mt-16 m-auto border-gray-800"> 
+    <div className="mt-16 m-auto border-gray-800 h-full mb-10"> 
       <h2 className="text-3xl font-bold sm:text-4xl px-2">
         Book Your <span className="text-primary">Meeting</span>!
       </h2>
