@@ -13,33 +13,32 @@ interface RequestsState {
   updateRequest: (request: Request) => Promise<void>;
 }
 
-const storeApi: StateCreator<RequestsState> = (set, get) => ({
+const storeApi: StateCreator<RequestsState> = (set) => ({
   requests: null,
   request: null,
 
   getAllRequests: async () => {
     try {
-        
-    const requests = await fetch(process.env.NEXT_PUBLIC_API_URL + "/requests")
-            .then(res => res.json())
-    console.log(requests)
-    set({requests})
-
+      const requests = await fetch(
+        process.env.NEXT_PUBLIC_API_URL + "/requests",
+      ).then((res) => res.json());
+      console.log(requests);
+      set({ requests });
     } catch (error) {
-        console.log(error);
+      console.log(error);
     }
   },
 
   getRequestById: async (id: string) => {
     try {
-       const response:any = await fetch(process.env.NEXT_PUBLIC_API_URL + "/requests/" + id).then(res => res.json());
-        console.log("req payload", response)
-        if (response.error) return; 
-        set({request: response});
-       
+      const response: any = await fetch(
+        process.env.NEXT_PUBLIC_API_URL + "/requests/" + id,
+      ).then((res) => res.json());
+      console.log("req payload", response);
+      if (response.error) return;
+      set({ request: response });
     } catch (error) {
-       console.log(error);
-    
+      console.log(error);
     }
   },
 
@@ -57,25 +56,24 @@ const storeApi: StateCreator<RequestsState> = (set, get) => ({
 
   updateRequest: async (request: Request) => {
     try {
-
-        let token = JSON.parse(localStorage.getItem("meetings_tk")!);
-        await fetch(process.env.NEXT_PUBLIC_API_URL + "/request/update", {
-            method: "PUT",
-            body: JSON.stringify(request),
-            headers: {
-              Authorization: "Bearer " + token,
-            },
-        })
-        set(state => ({
-            requests: state.requests!.map(req => req.id === request.id ? {...req, status: request.status} : req)
-        })) 
-        toast.success("updated request")
-    }  catch (error) {
-
-    }
-  }
+      let token = JSON.parse(localStorage.getItem("meetings_tk")!);
+      await fetch(process.env.NEXT_PUBLIC_API_URL + "/request/update", {
+        method: "PUT",
+        body: JSON.stringify(request),
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      });
+      set((state) => ({
+        requests: state.requests!.map((req) =>
+          req.id === request.id ? { ...req, status: request.status } : req,
+        ),
+      }));
+      toast.success("updated request");
+    } catch (error) {}
+  },
 });
 
 export const useRequestStore = create<RequestsState>()(
-    devtools(storeApi, {name: "requests-store"}),
-)
+  devtools(storeApi, { name: "requests-store" }),
+);

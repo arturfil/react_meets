@@ -56,10 +56,7 @@ function RequestsTable({ requests }: TableProps) {
         </TableHeader>
         <TableBody>
           {requests.map((request) => (
-            <RequestCard
-              key={request.id}
-              {...request}
-            />
+            <RequestCard key={request.id} {...request} />
           ))}
         </TableBody>
       </Table>

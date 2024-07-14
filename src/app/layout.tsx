@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import SideNav, { SidebarItem } from "@/components/Sidenav";
+import SideNav from "@/components/Sidenav";
 
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from "react-toastify";
+import BottomNavigation from "@/components/BottomNavigation";
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -35,6 +36,7 @@ export default function RootLayout({
             <main className="mx-auto">
                 {children}
             </main>
+            <BottomNavigation/>
         </div>
       </body>
     </html>

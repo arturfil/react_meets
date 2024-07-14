@@ -14,7 +14,6 @@ import { Pencil } from "lucide-react";
 import Link from "next/link";
 
 export default function EditSettings() {
-
   return (
     <div className="p-10 m-auto">
       <h2 className="font-bold text-2xl p-4 mx-auto rounded-md">
@@ -57,32 +56,32 @@ export default function EditSettings() {
 
 function ScheduleDialog() {
   return (
-     <Dialog>
+    <Dialog>
       <DialogTrigger asChild>
-        <Button className="w-[100px]" variant="outline">Edit 
-        <Pencil className="ml-4" />
+        <Button className="w-[100px]" variant="outline">
+          Edit
+          <Pencil className="ml-4" />
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="sm:max-w-[555px] sm:min-h-[400px]">
         <DialogHeader>
-          <DialogTitle>Edit Schedule
-        </DialogTitle>
+          <DialogTitle>Edit Schedule</DialogTitle>
           <DialogDescription>
-            Make changes to your profile here. Click save when you&apos;re done.
+            Select Start and End Time for available spots
           </DialogDescription>
         </DialogHeader>
         <div className="grid gap-4 py-4">
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="name" className="text-right">
-              Name
+              Start Work Time
             </Label>
-            <Input id="name" value="Pedro Duarte" className="col-span-3" />
+            <Input id="name" type="time" className="col-span-3" />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="username" className="text-right">
-              Username
+              End Work Time
             </Label>
-            <Input id="username" value="@peduarte" className="col-span-3" />
+            <Input id="username" type="time" className="col-span-3" />
           </div>
         </div>
         <DialogFooter>

@@ -8,7 +8,6 @@ import {
   LogOut,
   UserRoundPlus,
   ScrollText,
-  UserRound,
 } from "lucide-react";
 import Link from "next/link";
 import { BarChart3, Package, UserCircle } from "lucide-react";
@@ -63,7 +62,7 @@ export default function SideNav() {
   }
 
   return (
-    <aside className={`top-0 sticky h-screen ${isSideNavOpen ? "max-w-72" : "max-w-16"}`}>
+    <aside className={`top-0 sticky h-screen max-sm:hidden ${isSideNavOpen ? "max-w-72" : "max-w-16"}`}>
       <nav className="h-full sticky flex flex-col from-orange-500 border-r shadow-sm">
         <div className="p-4 pb-2 flex justify-between items-center">
           <h3 className="overflow-hidden ">Meetings</h3>
