@@ -1,34 +1,31 @@
-import { Meeting, MeetingResponse } from '@/interfaces/Meeting'
-import React from 'react'
+import React from 'react';
+
+import { Meeting, MeetingResponse } from '@/interfaces/Meeting';
 
 interface Props {
-    props: MeetingResponse
+  props: MeetingResponse;
 }
 
-export default function MeetingCard({props}: Props) {
+export default function MeetingCard({ props }: Props) {
   return (
-    <div className="w-60 p-2 bg-gray-100 rounded-xl shadow-md hover:shadow-lg">
-        <h2 className="font-bold text-lg">
-            Review: {props.subject}
-        </h2>
-        <p className="text-sm text-gray-600">
-            Teacher: {props.teacher}
-        </p>
-        <p className="text-sm text-gray-600">
-            Student: {props.student}
-        </p>
-        <p className="text-sm text-gray-600">
-            Starts at: {props.start_time.split("T")[0]} - {props.start_time.split("T")[1]}
-        </p>
-        <p className="text-sm mb-2 text-gray-600">
-            Ends at: {props.end_time.split("T")[0]}
-        </p>
-        <a role="button" 
-            href={`/meetings/${props.id}`} 
-            className="text-white text-sm bg-orange-600 px-3 py-1 rounded-lg"
-        >
-           Meeting Details 
-        </a>
-    </div> 
-  )
+    <div className="w-60 rounded-xl bg-gray-100 p-2 shadow-md hover:shadow-lg">
+      <h2 className="text-lg font-bold">Review: {props.subject}</h2>
+      <p className="text-sm text-gray-600">Teacher: {props.teacher}</p>
+      <p className="text-sm text-gray-600">Student: {props.student}</p>
+      <p className="text-sm text-gray-600">
+        Starts at: {props.start_time.split('T')[0]} -{' '}
+        {props.start_time.split('T')[1]}
+      </p>
+      <p className="mb-2 text-sm text-gray-600">
+        Ends at: {props.end_time.split('T')[0]}
+      </p>
+      <a
+        role="button"
+        href={`/meetings/${props.id}`}
+        className="rounded-lg bg-orange-600 px-3 py-1 text-sm text-white"
+      >
+        Meeting Details
+      </a>
+    </div>
+  );
 }

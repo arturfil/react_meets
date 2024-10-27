@@ -1,18 +1,21 @@
-"use client";
+'use client';
 
-import AuthGuard from "@/components/AuthGuard";
-import { useRequestStore } from "@/store/requests/requests.store";
-import RequestCard from "@/components/RequestCard";
-import React, { useEffect } from "react";
-import { Request } from "@/interfaces/Request";
+import React, { useEffect } from 'react';
+
+import AuthGuard from '@/components/AuthGuard';
+import MobileTableCard from '@/components/MobileTableCard';
+import RequestCard from '@/components/RequestCard';
 import {
   Table,
   TableBody,
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
-import MobileTableCard from "@/components/MobileTableCard";
+} from '@/components/ui/table';
+
+import { useRequestStore } from '@/store/requests/requests.store';
+
+import { Request } from '@/interfaces/Request';
 
 function Requests() {
   const requests = useRequestStore((state) => state.requests);
@@ -23,16 +26,16 @@ function Requests() {
   }, [getAllRequests]);
 
   return (
-    <div className="mt-16 mb-10 h-full">
+    <div className="container mx-auto mb-10 mt-16 h-full justify-center">
       <div className="flex">
-        <h2 className="font-bold text-5xl text-center justify-center my-5">
+        <h2 className="my-5 justify-center text-center text-3xl font-bold">
           Teacher Requests
         </h2>
       </div>
       {requests ? (
         <RequestsTable requests={requests} />
       ) : (
-        <h2 className="font-bold text-xl my-5">
+        <h2 className="my-5 text-xl font-bold">
           Server Trying to reach requests
         </h2>
       )}
@@ -61,19 +64,19 @@ function RequestsTable({ requests }: TableProps) {
         </TableHeader>
         <TableBody>
           {requests.map((request) => (
-            <RequestCard key={request.id} {...request} />
+            <RequestCard
+              key={request.id}
+              {...request}
+            />
           ))}
         </TableBody>
       </Table>
-      <div
-        className="grid grid-cols-1 
-                place-items-center sm:hidden 
-                md:hidden lg:hidden xl:hidden 2xl:hidden
-                w-full mx-auto justify-center
-"
-      >
+      <div className="mx-auto grid w-full grid-cols-1 place-items-center justify-center sm:hidden md:hidden lg:hidden xl:hidden 2xl:hidden">
         {requests.map((request) => (
-          <MobileTableCard key={request.id} {...request} />
+          <MobileTableCard
+            key={request.id}
+            {...request}
+          />
         ))}
       </div>
     </div>

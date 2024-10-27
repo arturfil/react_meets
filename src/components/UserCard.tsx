@@ -1,6 +1,8 @@
-import { User } from "@/interfaces/User";
-import { CircleUserRound } from "lucide-react";
-import React from "react";
+import React from 'react';
+
+import { CircleUserRound } from 'lucide-react';
+
+import { User } from '@/interfaces/User';
 
 interface Props {
   user: User;
@@ -8,10 +10,13 @@ interface Props {
 
 export default function UserCard({ user }: Props) {
   return (
-    <div className="flex w-60 h-40 p-2 bg-gray-100 rounded-xl shadow-md hover:shadow-lg">
-      <div className="flex flex-col align-middle justify-center mx-auto">
-        <CircleUserRound size={50} className="flex justify-center mx-auto" />
-        <h2 className="font-bold text-center text-lg flex align-middle">
+    <div className="flex h-40 w-60 rounded-xl bg-gray-100 p-2 shadow-md hover:shadow-lg">
+      <div className="mx-auto flex flex-col justify-center align-middle">
+        <CircleUserRound
+          size={50}
+          className="mx-auto flex justify-center"
+        />
+        <h2 className="flex text-center align-middle text-lg font-bold">
           {user.first_name} {user.last_name}
         </h2>
         <p className="text-sm text-gray-600">{user.email}</p>

@@ -1,4 +1,4 @@
 export interface ErrorLoginResponse {
-    message: string;
-    error: boolean;
+  message: string;
+  error: boolean;
 }

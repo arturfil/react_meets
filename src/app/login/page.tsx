@@ -1,9 +1,11 @@
-"use client";
+'use client';
 
-import { useAuthStore } from "@/store/auth/auth.store";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { FormEvent } from "react";
+import { FormEvent } from 'react';
+
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+
+import { useAuthStore } from '@/store/auth/auth.store';
 
 export default function Login() {
   const loginUser = useAuthStore((state) => state.loginUser);
@@ -15,16 +17,20 @@ export default function Login() {
     event.preventDefault();
 
     const { email, password } = event.target as typeof event.target & {
-      email: { value: string };
-      password: { value: string };
+      email: {
+        value: string;
+      };
+      password: {
+        value: string;
+      };
     };
 
     try {
       const response = await loginUser(email.value, password.value);
-      email.value = "";
-      password.value = "";
-      if (response === "success") {
-        router.push("/");
+      email.value = '';
+      password.value = '';
+      if (response === 'success') {
+        router.push('/');
       }
     } catch (error) {
       console.log(error);
@@ -33,21 +39,21 @@ export default function Login() {
 
   return (
     <div className="mt-20">
-      <div className="w-96 p-8 bg-gray-100 rounded-xl shadow h-[500px]">
-        <h2 className="text-2xl mb-6 font-bold justify-center flex">Login</h2>
+      <div className="h-[500px] w-96 rounded-xl bg-gray-100 p-8 shadow">
+        <h2 className="mb-6 flex justify-center text-2xl font-bold">Login</h2>
 
         {loginResponse && loginResponse.error ? (
-          <div className="text-red-400 border-red-400 border-[1px] rounded-md mb-2 p-5">
+          <div className="mb-2 rounded-md border-[1px] border-red-400 p-5 text-red-400">
             <h2>{loginResponse.message}</h2>
           </div>
         ) : (
-          ""
+          ''
         )}
 
         <form onSubmit={handleLogin}>
           <div className="mb-4">
             <label
-              className="block text-gray-700 text-sm font-bold mb-2"
+              className="mb-2 block text-sm font-bold text-gray-700"
               htmlFor="email"
             >
               Email
@@ -55,14 +61,14 @@ export default function Login() {
             <input
               type="text"
               name="email"
-              className="w-full p-2 border rounded-xl focus:outline-none focus:border-blue-500"
+              className="w-full rounded-xl border p-2 focus:border-blue-500 focus:outline-none"
               placeholder="Enter your email"
             />
           </div>
 
           <div className="mb-4">
             <label
-              className="block text-gray-700 text-sm font-bold mb-2"
+              className="mb-2 block text-sm font-bold text-gray-700"
               htmlFor="password"
             >
               Password
@@ -70,17 +76,20 @@ export default function Login() {
             <input
               name="password"
               type="password"
-              className="w-full p-2 border rounded-xl focus:outline-none focus:border-blue-500 mb-2"
+              className="mb-2 w-full rounded-xl border p-2 focus:border-blue-500 focus:outline-none"
               placeholder="Enter your password"
             />
           </div>
 
-          <button className="w-full bg-gradient-to-r from-green-300 to-green-500 text-white p-2 rounded-xl hover:bg-green-600 focus:outline-none">
+          <button className="w-full rounded-xl bg-gradient-to-r from-green-300 to-green-500 p-2 text-white hover:bg-green-600 focus:outline-none">
             Login
           </button>
 
           <div className="mt-4">
-            <Link href="/signup" className="text-blue-500">
+            <Link
+              href="/signup"
+              className="text-blue-500"
+            >
               If you don&apos;t have an account yet click here
             </Link>
           </div>

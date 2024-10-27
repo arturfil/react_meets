@@ -1,7 +1,8 @@
-import { Request } from "@/interfaces/Request";
-import { toast } from "react-toastify";
-import { StateCreator, create } from "zustand";
-import { devtools } from "zustand/middleware";
+import { toast } from 'react-toastify';
+import { StateCreator, create } from 'zustand';
+import { devtools } from 'zustand/middleware';
+
+import { Request } from '@/interfaces/Request';
 
 interface RequestsState {
   requests: Request[] | null;
@@ -20,7 +21,7 @@ const storeApi: StateCreator<RequestsState> = (set) => ({
   getAllRequests: async () => {
     try {
       const requests = await fetch(
-        process.env.NEXT_PUBLIC_API_URL + "/requests",
+        process.env.NEXT_PUBLIC_API_URL + '/requests'
       ).then((res) => res.json());
       console.log(requests);
       set({ requests });
@@ -32,9 +33,9 @@ const storeApi: StateCreator<RequestsState> = (set) => ({
   getRequestById: async (id: string) => {
     try {
       const response: any = await fetch(
-        process.env.NEXT_PUBLIC_API_URL + "/requests/" + id,
+        process.env.NEXT_PUBLIC_API_URL + '/requests/' + id
       ).then((res) => res.json());
-      console.log("req payload", response);
+      console.log('req payload', response);
       if (response.error) return;
       set({ request: response });
     } catch (error) {
@@ -44,11 +45,11 @@ const storeApi: StateCreator<RequestsState> = (set) => ({
 
   createRequest: async (request: Request) => {
     try {
-      await fetch(process.env.NEXT_PUBLIC_API_URL + "/requests/create", {
-        method: "POST",
+      await fetch(process.env.NEXT_PUBLIC_API_URL + '/requests/create', {
+        method: 'POST',
         body: JSON.stringify(request),
       });
-      toast.success("successfully created a request");
+      toast.success('successfully created a request');
     } catch (error) {
       console.log(error);
     }
@@ -56,24 +57,24 @@ const storeApi: StateCreator<RequestsState> = (set) => ({
 
   updateRequest: async (request: Request) => {
     try {
-      let token = JSON.parse(localStorage.getItem("meetings_tk")!);
-      await fetch(process.env.NEXT_PUBLIC_API_URL + "/request/update", {
-        method: "PUT",
+      let token = JSON.parse(localStorage.getItem('meetings_tk')!);
+      await fetch(process.env.NEXT_PUBLIC_API_URL + '/request/update', {
+        method: 'PUT',
         body: JSON.stringify(request),
         headers: {
-          Authorization: "Bearer " + token,
+          Authorization: 'Bearer ' + token,
         },
       });
       set((state) => ({
         requests: state.requests!.map((req) =>
-          req.id === request.id ? { ...req, status: request.status } : req,
+          req.id === request.id ? { ...req, status: request.status } : req
         ),
       }));
-      toast.success("updated request");
+      toast.success('updated request');
     } catch (error) {}
   },
 });
 
 export const useRequestStore = create<RequestsState>()(
-  devtools(storeApi, { name: "requests-store" }),
+  devtools(storeApi, { name: 'requests-store' })
 );

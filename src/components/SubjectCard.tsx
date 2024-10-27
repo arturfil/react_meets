@@ -1,22 +1,20 @@
-import { Subject } from '@/interfaces/Subject'
-import React from 'react'
+import React from 'react';
+
+import { Subject } from '@/interfaces/Subject';
 
 interface Props {
-    subject: Subject
+  subject: Subject;
 }
 
-export default function SubjectCard({subject}: Props) {
+export default function SubjectCard({ subject }: Props) {
   return (
-    <div className="flex w-60 h-40 p-2 bg-gray-100 rounded-xl shadow-md hover:shadow-lg">
-      <div className="flex flex-col align-middle justify-center mx-auto">
-        <h2 className="font-bold text-center text-lg">
-          {subject.name }
-        </h2>
-        <p className="text-sm overflow-clip overflow-ellipsis text-wrap text-gray-600">
-          {subject.description} 
+    <div className="flex h-40 w-60 rounded-xl bg-gray-100 p-2 shadow-md hover:shadow-lg">
+      <div className="mx-auto flex flex-col justify-center align-middle">
+        <h2 className="text-center text-lg font-bold">{subject.name}</h2>
+        <p className="overflow-clip overflow-ellipsis text-wrap text-sm text-gray-600">
+          {subject.description}
         </p>
       </div>
-    </div> 
-  )
+    </div>
+  );
 }
-

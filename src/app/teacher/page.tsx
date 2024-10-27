@@ -1,13 +1,17 @@
-"use client";
+'use client';
 
-import AuthGuard from "@/components/AuthGuard";
-import { Button } from "@/components/ui/button";
-import { useAuthStore } from "@/store/auth/auth.store";
-import { useRequestStore } from "@/store/requests/requests.store";
-import { Settings } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
-import React, { useEffect } from "react";
+import React, { useEffect } from 'react';
+
+import Image from 'next/image';
+import Link from 'next/link';
+
+import { Settings } from 'lucide-react';
+
+import AuthGuard from '@/components/AuthGuard';
+import { Button } from '@/components/ui/button';
+
+import { useAuthStore } from '@/store/auth/auth.store';
+import { useRequestStore } from '@/store/requests/requests.store';
 
 function TeacherPage() {
   const user = useAuthStore((state) => state.user);
@@ -26,39 +30,39 @@ function TeacherPage() {
   }, [getRequestById, user]);
 
   return (
-    <div className="mt-16 m-10">
-      {user?.roles?.includes("teacher") ? (
+    <div className="m-10 mt-16">
+      {user?.roles?.includes('teacher') ? (
         <Profile />
       ) : (
         <div className="flex flex-col">
           <Image
-            className="rounded-3xl flex justify-center mx-auto mb-10"
+            className="mx-auto mb-10 flex justify-center rounded-3xl"
             src="/tutor-image.jpg"
             width={600}
             height={400}
             alt="tutors"
           />
 
-          <h2 className="font-bold text-2xl w-8/12 p-4 mx-auto bg-green-200 rounded-md">
+          <h2 className="mx-auto w-8/12 rounded-md bg-green-200 p-4 text-2xl font-bold">
             If you want to teach courses first create a user account and then
             request your teacher account here.
           </h2>
 
           <br />
 
-          <h2 className="font-bold w-8/12 mx-auto p-4 bg-green-300 rounded-md">
+          <h2 className="mx-auto w-8/12 rounded-md bg-green-300 p-4 font-bold">
             You already requeseted teacher access? Please wait till the
             verification process is completed or get in contact with support.
           </h2>
 
           {request ? (
-            <h2 className="flex justify-center mt-5 text-lg font-bold">
+            <h2 className="mt-5 flex justify-center text-lg font-bold">
               Your request has been sent already!
             </h2>
           ) : (
             <Button
               asChild
-              className="mt-5 w-[200px] flex justify-center mx-auto"
+              className="mx-auto mt-5 flex w-[200px] justify-center"
             >
               <Link href="/requests/createrequests">Request Access</Link>
             </Button>
@@ -74,44 +78,38 @@ function Profile() {
 
   return (
     <>
-      <div className="
-            flex flex-col border-gray-400 sm:border-[1px] 
-            md:border-[1px] lg:border-[1px] p-6 container 
-            w-[300px] sm:w-[500px] md:w-[600px] lg:w-[800px] 
-            h-[600px] rounded-lg">
-        <div className="grid sm:grid-cols-1 lg:grid-cols-3 md:grid-cols-3">
-          <h2 className="font-semibold text-[40px]">
+      <div className="container flex h-[600px] w-[300px] flex-col rounded-lg border-gray-400 p-6 sm:w-[500px] sm:border-[1px] md:w-[600px] md:border-[1px] lg:w-[800px] lg:border-[1px]">
+        <div className="grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3">
+          <h2 className="text-[40px] font-semibold">
             {user?.first_name} {user?.last_name}
           </h2>
           <p className="content-end">{user?.email}</p>
-          <div className="place-self-end mr-10 mb-4 flex">
+          <div className="mb-4 mr-10 flex place-self-end">
             <h2 className="mr-3">Edit</h2>
             <Link href="/teacher/edit">
-            <Settings />
+              <Settings />
             </Link>
           </div>
         </div>
-        <hr className="border-gray-400 my-2" />
-        <div className="grid sm:grid-cols-1 lg:grid-cols-3 md:grid-cols-3">
+        <hr className="my-2 border-gray-400" />
+        <div className="grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3">
           <h2>Roles</h2>
           <div className="flex space-x-1">
             <ul>{user?.roles?.map((r) => <li key={r}>{r}</li>)}</ul>
           </div>
-          <h2 className="w-[100px] text-primary">
-            Request new roles
-          </h2>
+          <h2 className="w-[100px] text-primary">Request new roles</h2>
         </div>
-        <hr className="border-gray-400 my-2" />
-        <div className="grid sm:grid-cols-1 lg:grid-cols-3 md:grid-cols-3">
+        <hr className="my-2 border-gray-400" />
+        <div className="grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3">
           <h2>Start Work Time</h2>
           <p>8:00 AM</p>
         </div>
-        <div className="grid sm:grid-cols-1 lg:grid-cols-3 md:grid-cols-3">
+        <div className="grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3">
           <h2>End Work Time</h2>
           <p>6:00 PM</p>
         </div>
-        <hr className="border-gray-400 my-2" />
-        <div className="grid sm:grid-cols-1 lg:grid-cols-3 md:grid-cols-3">
+        <hr className="my-2 border-gray-400" />
+        <div className="grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3">
           <h2>Subjects Taught</h2>
           <p>Test</p>
         </div>

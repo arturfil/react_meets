@@ -1,5 +1,5 @@
-import { create } from "zustand";
-import { persist } from "zustand/middleware";
+import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
 
 interface State {
   // props
@@ -14,9 +14,12 @@ export const useUIStore = create<State>()(
     (set, get) => ({
       isSideNavOpen: false,
 
-      toggleSideNav: () => set({ isSideNavOpen: !get().isSideNavOpen }),
+      toggleSideNav: () =>
+        set({
+          isSideNavOpen: !get().isSideNavOpen,
+        }),
     }),
 
-    { name: "ui_store" },
-  ),
+    { name: 'ui_store' }
+  )
 );

@@ -1,5 +1,6 @@
-import React from "react";
-import { Calendar } from "./ui/calendar";
+import React from 'react';
+
+import { Calendar } from './ui/calendar';
 import {
   Dialog,
   DialogContent,
@@ -7,10 +8,10 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "./ui/dialog";
+} from './ui/dialog';
 
 export default function BookingModel() {
-  const [date, setDate] = React.useState<Date | undefined>(new Date())
+  const [date, setDate] = React.useState<Date | undefined>(new Date());
 
   return (
     <Dialog>
@@ -19,12 +20,12 @@ export default function BookingModel() {
         <DialogHeader>
           <DialogTitle>Are you absolutely sure?</DialogTitle>
           <DialogDescription>
-          <Calendar
-            mode="single"
-            selected={date}
-            onSelect={setDate}
-            className="rounded-md border"
-          />
+            <Calendar
+              mode="single"
+              selected={date}
+              onSelect={setDate}
+              className="rounded-md border"
+            />
           </DialogDescription>
         </DialogHeader>
       </DialogContent>
