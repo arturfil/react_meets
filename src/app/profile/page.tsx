@@ -1,9 +1,7 @@
 'use client';
 
 import React, { useEffect } from 'react';
-
 import AuthGuard from '@/components/AuthGuard';
-
 import { useAuthStore } from '@/store/auth/auth.store';
 
 function Profile() {

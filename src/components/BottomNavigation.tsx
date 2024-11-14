@@ -6,7 +6,7 @@ import { BarChart3, BookCheck, Package, ScrollText } from 'lucide-react';
 
 export default function BottomNavigation() {
   return (
-    <div className="container fixed bottom-0 left-0 right-0 z-10 flex h-10 w-full justify-between border-t-2 border-gray-300 bg-white pb-[60px] pt-[20px] text-gray-500 sm:hidden md:hidden lg:hidden xl:hidden 2xl:hidden">
+    <div className="container dark:bg-gray-800 dark:text-gray-50 fixed bottom-0 left-0 right-0 z-10 flex h-10 w-full justify-between border-t-2 border-gray-300 bg-white pb-[60px] pt-[20px] text-gray-500 sm:hidden md:hidden lg:hidden xl:hidden 2xl:hidden">
       <div className="flex bg-red-400">
         <Link href="/">
           <BarChart3

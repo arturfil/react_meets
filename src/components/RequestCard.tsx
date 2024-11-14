@@ -5,6 +5,7 @@ import { Check, Clipboard } from 'lucide-react';
 import { useRequestStore } from '@/store/requests/requests.store';
 
 import { TableCell, TableRow } from './ui/table';
+import { Button } from './ui/button';
 
 interface Props {
   id: string;
@@ -30,7 +31,7 @@ export default function RequestCard({ id, first_name, type, status }: Props) {
         <TableCell>{type}</TableCell>
         <TableCell>{status}</TableCell>
         <TableCell className="text-right">
-          <button
+          <Button
             onClick={() =>
               updateRequest({
                 id,
@@ -38,13 +39,13 @@ export default function RequestCard({ id, first_name, type, status }: Props) {
                 type,
               })
             }
-            className="w-full rounded-lg bg-gradient-to-r from-green-400 to-emerald-500 p-1 text-white hover:bg-green-600 focus:outline-none"
           >
             Approve
-          </button>
+          </Button>
         </TableCell>
         <TableCell className="text-right">
-          <button
+          <Button
+            variant="outline"
             onClick={() =>
               updateRequest({
                 id,
@@ -52,10 +53,9 @@ export default function RequestCard({ id, first_name, type, status }: Props) {
                 type,
               })
             }
-            className="w-full rounded-lg bg-gradient-to-r from-red-400 to-orange-500 p-1 text-white hover:bg-green-600 focus:outline-none"
           >
             Deny
-          </button>
+          </Button>
         </TableCell>
         <TableCell className="cursor-pointer text-right">
           {!copied ? (

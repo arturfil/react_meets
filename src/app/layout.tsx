@@ -23,7 +23,27 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  let storedData = localStorage.getItem('ui_store');
+                  let theme = storedData 
+                    ? JSON.parse(storedData).state.theme 
+                    : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+                  
+                  if (theme === 'dark') {
+                    document.documentElement.classList.add('dark');
+                  }
+                } catch (e) {}
+              })();
+            `,
+          }}
+        />
+      </head>
+      <body className="bg-white dark:bg-gray-900">
         <div className="flex">
           <ToastContainer
             position="top-right"

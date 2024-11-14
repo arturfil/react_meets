@@ -1,9 +1,8 @@
-'use client';
+"use client";
 
-import Image from 'next/image';
-import Link from 'next/link';
-import { redirect, usePathname } from 'next/navigation';
-
+import Image from "next/image";
+import Link from "next/link";
+import { redirect, usePathname } from "next/navigation";
 import {
   BookCheck,
   ChevronFirst,
@@ -11,13 +10,12 @@ import {
   LogOut,
   ScrollText,
   UserRoundPlus,
-} from 'lucide-react';
-import { BarChart3, Package, UserCircle } from 'lucide-react';
-
-import useHasMounted from '@/hooks/hasMounted';
-
-import { useAuthStore } from '@/store/auth/auth.store';
-import { useUIStore } from '@/store/ui/ui-store';
+} from "lucide-react";
+import { BarChart3, Package, UserCircle } from "lucide-react";
+import useHasMounted from "@/hooks/hasMounted";
+import { useAuthStore } from "@/store/auth/auth.store";
+import { useUIStore } from "@/store/ui/ui-store";
+import ThemeToggle from "./theme/ThemeToggle";
 
 interface SideBarProps {
   icon: JSX.Element;
@@ -31,21 +29,21 @@ interface SideBarProps {
 const pages = [
   {
     alert: false,
-    url: '/',
+    url: "/",
     icon: <BarChart3 size={20} />,
-    text: 'Home',
+    text: "Home",
   },
   {
     alert: false,
-    url: '/meetings/createmeeting',
+    url: "/meetings/createmeeting",
     icon: <Package size={20} />,
-    text: 'Reserve',
+    text: "Reserve",
   },
   {
     alert: false,
-    url: '/teacher',
+    url: "/teacher",
     icon: <BookCheck size={20} />,
-    text: 'Teacher',
+    text: "Teacher",
   },
   /*{
     alert: false,
@@ -67,12 +65,12 @@ export default function SideNav() {
 
   function handleLogOut() {
     logoutUser();
-    redirect('/landing');
+    redirect("/landing");
   }
 
   return (
     <aside
-      className={`sticky top-0 h-screen max-sm:hidden ${isSideNavOpen ? 'max-w-72' : 'max-w-16'}`}
+      className={`sticky top-0 h-screen max-sm:hidden ${isSideNavOpen ? "max-w-60" : "max-w-16"}`}
     >
       <nav className="sticky flex h-full flex-col border-r from-orange-500 shadow-sm">
         <div className="flex items-center justify-between p-4 pb-2">
@@ -87,7 +85,7 @@ export default function SideNav() {
           </Link>
           <button
             onClick={() => toggleMenu()}
-            className="rounded-lg bg-gray-50 p-1.5 hover:bg-green-100"
+            className="rounded-lg bg-gray-50 p-1.5 hover:bg-green-100 dark:bg-gray-600"
           >
             {isSideNavOpen ? <ChevronFirst /> : <ChevronLast />}
           </button>
@@ -105,9 +103,9 @@ export default function SideNav() {
               />
             ))}
 
-            {user && user.roles && user?.roles?.includes('admin') && (
+            {user && user.roles && user?.roles?.includes("admin") && (
               <SidebarItem
-                key={'requests'}
+                key={"requests"}
                 url="/requests"
                 icon={<ScrollText size={20} />}
                 text="Requests"
@@ -118,7 +116,7 @@ export default function SideNav() {
             {isLoggedIn ? (
               <SidebarItem
                 action={handleLogOut}
-                key={'logout'}
+                key={"logout"}
                 icon={<LogOut />}
                 text="logout"
                 alert={false}
@@ -126,14 +124,14 @@ export default function SideNav() {
             ) : (
               <>
                 <SidebarItem
-                  key={'login'}
+                  key={"login"}
                   url="/login"
                   icon={<UserCircle size={20} />}
                   text="Log In"
                   alert={false}
                 />
                 <SidebarItem
-                  key={'signup'}
+                  key={"signup"}
                   url="/signup"
                   icon={<UserRoundPlus size={20} />}
                   text="Sign Up"
@@ -141,6 +139,7 @@ export default function SideNav() {
                 />
               </>
             )}
+            <ThemeToggle />
           </ul>
         )}
       </nav>
@@ -151,26 +150,26 @@ export default function SideNav() {
 export function SidebarItem({ icon, text, alert, url, action }: SideBarProps) {
   const pathname = usePathname();
   const isSideNavOpen = useUIStore((state) => state.isSideNavOpen);
-  const activeClass = pathname === url ? 'bg-primary text-white' : '';
+  const activeClass = pathname === url ? "rounded-xl bg-primary text-white" : "";
   console.log();
 
   return (
     <Link
-      href={url ? url : ''}
+      href={url ? url : ""}
       onClick={action ? () => action() : () => {}}
     >
       <li
-        className={` ${activeClass} group relative my-1 flex cursor-pointer items-center rounded-md px-3 py-2 font-medium text-gray-600 transition-colors hover:bg-green-200`}
+        className={` ${activeClass} group relative my-1 flex cursor-pointer items-center rounded-xl px-3 py-2 font-medium text-gray-600 transition-colors hover:bg-green-200`}
       >
         {icon}
         <span
-          className={`overflow-hidden ${isSideNavOpen ? 'ml-3 w-52' : 'w-0'}`}
+          className={`overflow-hidden ${isSideNavOpen ? "ml-3 w-52" : "w-0"}`}
         >
           {text}
         </span>
         {alert && (
           <div
-            className={`absolute right-2 h-2 w-2 rounded bg-yellow-400 ${isSideNavOpen ? '' : 'top-2'} `}
+            className={`absolute right-2 h-2 w-2 rounded bg-yellow-400 ${isSideNavOpen ? "" : "top-2"} `}
           />
         )}
 

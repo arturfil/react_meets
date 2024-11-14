@@ -1,11 +1,10 @@
-import { StateCreator, create } from 'zustand';
-import { devtools } from 'zustand/middleware';
-
-import { Teaching } from '../../interfaces/Teaching';
-import { useAuthStore } from '../auth/auth.store';
+import { StateCreator, create } from "zustand";
+import { devtools } from "zustand/middleware";
+import { Subject } from "@/interfaces/Subject";
+import { useAuthStore } from "../auth/auth.store";
 
 interface TeachingState {
-  teachings: Teaching[] | null;
+  teachings: Subject[] | null;
   loading: boolean;
 
   getTeachings: () => Promise<void>;
@@ -19,7 +18,7 @@ const storeApi: StateCreator<TeachingState> = (set) => ({
     const user = useAuthStore.getState().user;
 
     if (!user) {
-      console.log('No User');
+      console.log("No User");
       return;
     }
 
@@ -27,16 +26,16 @@ const storeApi: StateCreator<TeachingState> = (set) => ({
       const teachings: any = await fetch(
         process.env.NEXT_PUBLIC_API_URL + `/teachings/${user.id}`
       ).then((res) => res.json());
-      console.log('Teachings', teachings);
+      console.log("Teachings", teachings);
       set({ teachings });
     } catch (error) {
-      console.log('Error: ', error);
+      console.log("Error: ", error);
     }
   },
 });
 
 export const useTeachingStore = create<TeachingState>()(
   devtools(storeApi, {
-    name: 'teachning-store',
+    name: "teachning-store",
   })
 );

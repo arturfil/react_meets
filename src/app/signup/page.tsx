@@ -34,13 +34,13 @@ export default function Signup() {
 
   return (
     <div className="mt-20">
-      <div className="h-[700px] w-96 rounded-xl bg-gray-100 p-8 shadow">
-        <h2 className="mb-6 flex justify-center text-2xl font-bold">Signup</h2>
+      <div className="h-[700px] dark:bg-gray-800 dark:text-gray-800 w-96 rounded-xl bg-gray-100 p-8 shadow">
+        <h2 className="mb-6 flex dark:text-gray-400 justify-center text-2xl font-bold">Signup</h2>
 
         <form onSubmit={handelSubmit}>
           <div className="mb-4">
             <label
-              className="mb-2 block text-sm font-bold text-gray-700"
+              className="mb-2 block text-sm font-bold dark:text-gray-100 text-gray-700"
               htmlFor="email"
             >
               Email
@@ -62,7 +62,7 @@ export default function Signup() {
 
           <div className="mb-4">
             <label
-              className="mb-2 block text-sm font-bold text-gray-700"
+              className="mb-2 block text-sm font-bold dark:text-gray-100 text-gray-700"
               htmlFor="first_name"
             >
               First Name
@@ -84,7 +84,7 @@ export default function Signup() {
 
           <div className="mb-4">
             <label
-              className="mb-2 block text-sm font-bold text-gray-700"
+              className="mb-2 block text-sm font-bold dark:text-gray-100 text-gray-700"
               htmlFor="last_name"
             >
               Last Name
@@ -106,7 +106,7 @@ export default function Signup() {
 
           <div className="mb-4">
             <label
-              className="mb-2 block text-sm font-bold text-gray-700"
+              className="mb-2 block text-sm font-bold dark:text-gray-100 text-gray-700"
               htmlFor="password"
             >
               Password
@@ -128,7 +128,7 @@ export default function Signup() {
 
           <div className="mb-4">
             <label
-              className="mb-2 block text-sm font-bold text-gray-700"
+              className="mb-2 block text-sm font-bold dark:text-gray-100 text-gray-700"
               htmlFor="password"
             >
               Confirm Password

@@ -8,10 +8,10 @@ import Hero from '@/components/Hero';
 import RadioSearchGroup from '@/components/RadioSearchGroup';
 import SearchComponent from '@/components/SearchComponent';
 import SubjectCard from '@/components/SubjectCard';
-import UserCard from '@/components/UserCard';
 
 import { useAuthStore } from '@/store/auth/auth.store';
 import { useSubjectStore } from '@/store/subject/subject.store';
+import UserCard from '@/components/cards/UserCard';
 
 type SearchOption = 'Teacher' | 'Subject';
 
@@ -60,7 +60,7 @@ function LandingPage() {
           </h2>
         )}
 
-        <div className="grid place-items-center gap-10 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid place-items-center gap-10 sm:grid-cols-1 lg:grid-cols-1">
           {teachers &&
             teachers.length > 0 &&
             teachers

@@ -1,11 +1,9 @@
-'use client';
+"use client";
 
-import { FormEvent } from 'react';
-
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-
-import { useAuthStore } from '@/store/auth/auth.store';
+import { FormEvent } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useAuthStore } from "@/store/auth/auth.store";
 
 export default function Login() {
   const loginUser = useAuthStore((state) => state.loginUser);
@@ -27,10 +25,10 @@ export default function Login() {
 
     try {
       const response = await loginUser(email.value, password.value);
-      email.value = '';
-      password.value = '';
-      if (response === 'success') {
-        router.push('/');
+      email.value = "";
+      password.value = "";
+      if (response === "success") {
+        router.push("/");
       }
     } catch (error) {
       console.log(error);
@@ -39,21 +37,26 @@ export default function Login() {
 
   return (
     <div className="mt-20">
-      <div className="h-[500px] w-96 rounded-xl bg-gray-100 p-8 shadow">
-        <h2 className="mb-6 flex justify-center text-2xl font-bold">Login</h2>
+      <div className="h-[500px] w-96 rounded-xl bg-gray-100 p-8 shadow dark:bg-gray-800 dark:text-gray-800">
+        <h2 className="mb-6 flex justify-center text-2xl font-bold dark:text-gray-400">
+          Login
+        </h2>
 
         {loginResponse && loginResponse.error ? (
           <div className="mb-2 rounded-md border-[1px] border-red-400 p-5 text-red-400">
             <h2>{loginResponse.message}</h2>
           </div>
         ) : (
-          ''
+          ""
         )}
 
-        <form onSubmit={handleLogin}>
+        <form
+          onSubmit={handleLogin}
+          className=""
+        >
           <div className="mb-4">
             <label
-              className="mb-2 block text-sm font-bold text-gray-700"
+              className="mb-2 block text-sm font-bold text-gray-700 dark:text-gray-100"
               htmlFor="email"
             >
               Email
@@ -68,7 +71,7 @@ export default function Login() {
 
           <div className="mb-4">
             <label
-              className="mb-2 block text-sm font-bold text-gray-700"
+              className="mb-2 block text-sm font-bold text-gray-700 dark:text-gray-100"
               htmlFor="password"
             >
               Password

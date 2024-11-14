@@ -87,7 +87,7 @@ function CreateMeetingPage() {
         <h2 className="text-xl">Step 1: Choose your Subject</h2>
       </div>
 
-      <div className="m-auto my-10 grid gap-6 bg-white sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2">
+      <div className="dark:bg-gray-900 m-auto my-10 grid gap-6 bg-white sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2">
         <div className="mx-auto flex w-[310px] grid-cols-1 flex-col justify-center border-gray-800">
           <h2 className="font-bold">Choose a Subject</h2>
 
@@ -99,7 +99,7 @@ function CreateMeetingPage() {
               })
             }
             defaultValue={'default'}
-            className="rounded-md border-2 border-gray-300 bg-white p-2 px-10"
+            className="dark:bg-gray-900 rounded-md border-2 border-gray-300 bg-white p-2 px-10"
             name=""
             id=""
           >
@@ -133,7 +133,7 @@ function CreateMeetingPage() {
               })
             }
             defaultValue="default"
-            className="rounded-md border-2 border-gray-300 bg-white p-2 px-10"
+            className="dark:bg-gray-900 rounded-md border-2 border-gray-300 bg-white p-2 px-10"
             name=""
             id=""
           >

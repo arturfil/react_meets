@@ -1,24 +1,19 @@
-'use client';
+"use client";
 
-import React, { useEffect, useState } from 'react';
-
-import Link from 'next/link';
-
-import { Check, Clipboard, Search } from 'lucide-react';
-
-import { Button } from '@/components/ui/button';
+import React, { useEffect, useState } from "react";
+import Link from "next/link";
+import { Check, Clipboard, Search } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import {
   Table,
   TableBody,
   TableHead,
   TableHeader,
   TableRow,
-} from '@/components/ui/table';
-
-import { useSubjectStore } from '@/store/subject/subject.store';
-import { useTeachingStore } from '@/store/teachings/teachings.store';
-
-import { Subject } from '@/interfaces/Subject';
+} from "@/components/ui/table";
+import { useSubjectStore } from "@/store/subject/subject.store";
+import { useTeachingStore } from "@/store/teachings/teachings.store";
+import { Subject } from "@/interfaces/Subject";
 
 export default function Subjects() {
   const subjects = useSubjectStore((state) => state.subjects);
@@ -67,7 +62,7 @@ export default function Subjects() {
                       {subject.description}
                     </p>
                   </td>
-                  <td>{subject.created_at?.toString().split('T')[0]}</td>
+                  <td>{subject.created_at?.toString().split("T")[0]}</td>
                   <td className="cursor-pointer text-right">
                     {!copied ? (
                       <Clipboard

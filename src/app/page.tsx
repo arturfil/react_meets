@@ -1,25 +1,19 @@
 'use client';
 
-import { useEffect } from 'react';
-
 import AuthGuard from '@/components/AuthGuard';
-import SubjectsCategoriesTable from '@/components/tables/SubjectsCategoriesTable';
-import SubjectsTable from '@/components/tables/SubjectsTable';
+import UserCard from '@/components/cards/UserCard';
+import FilteredTeacherLayout from '@/components/layouts/FilteredTeacherLayout';
 
-import { useFetchSubjects } from './hooks/useSubjects';
+import { useGetTeachers } from '@/hooks/useTeachers';
 
 function HomePage() {
-  const { subjects, categories } = useFetchSubjects();
+  const { teachers } = useGetTeachers();
 
   return (
-    <div className="container mb-10 mt-16 h-full border-gray-800">
-      <h2 className="text-3xl font-bold sm:text-4xl">Get tutored now!</h2>
-      <div className="mt-10">
-        <SubjectsCategoriesTable categories={categories ?? []} />
-      </div>
-      <div className="mt-10">
-        <SubjectsTable subjects={subjects ?? []} />
-      </div>
+    <div className="container rounded-xl mx-auto mb-10 mt-16 h-full justify-center">
+      <h2 className="my-5 text-3xl font-bold">Get tutored now!</h2>
+
+      <FilteredTeacherLayout users={teachers} />
     </div>
   );
 }

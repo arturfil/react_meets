@@ -2,11 +2,8 @@
 
 import { useState } from 'react';
 
-import { Check, Clipboard } from 'lucide-react';
-
 import { Category } from '@/interfaces/Category';
 
-import AuthGuard from '../AuthGuard';
 import { Button } from '../ui/button';
 import {
   Table,
