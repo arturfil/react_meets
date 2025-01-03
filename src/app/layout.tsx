@@ -1,8 +1,9 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
+import { Inter } from 'next/font/google';
 
 import BottomNavigation from '@/components/BottomNavigation';
 import SideNav from '@/components/Sidenav';
@@ -22,7 +23,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang='en'>
       <head>
         <script
           dangerouslySetInnerHTML={{
@@ -43,18 +44,18 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="bg-white dark:bg-gray-900">
-        <div className="flex">
+      <body>
+        <div className='flex'>
           <ToastContainer
-            position="top-right"
+            position='top-right'
             autoClose={2000}
             hideProgressBar={false}
             closeOnClick
             pauseOnHover
-            theme="colored"
+            theme='colored'
           />
           <SideNav />
-          <main className="mx-auto">{children}</main>
+          <main className='mx-auto'>{children}</main>
           <BottomNavigation />
         </div>
       </body>

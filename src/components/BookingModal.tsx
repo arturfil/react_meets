@@ -21,10 +21,10 @@ export default function BookingModel() {
           <DialogTitle>Are you absolutely sure?</DialogTitle>
           <DialogDescription>
             <Calendar
-              mode="single"
+              mode='single'
               selected={date}
               onSelect={setDate}
-              className="rounded-md border"
+              className='rounded-md border'
             />
           </DialogDescription>
         </DialogHeader>

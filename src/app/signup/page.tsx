@@ -1,11 +1,8 @@
 'use client';
 
 import { FormEvent, useState } from 'react';
-
 import { useRouter } from 'next/navigation';
-
 import { toast } from 'react-toastify';
-
 import { useAuthStore } from '@/store/auth/auth.store';
 
 export default function Signup() {
@@ -33,15 +30,17 @@ export default function Signup() {
   }
 
   return (
-    <div className="mt-20">
-      <div className="h-[700px] dark:bg-gray-800 dark:text-gray-800 w-96 rounded-xl bg-gray-100 p-8 shadow">
-        <h2 className="mb-6 flex dark:text-gray-400 justify-center text-2xl font-bold">Signup</h2>
+    <div className='mt-20'>
+      <div className='h-[700px] w-96 rounded-xl bg-gray-100 p-8 shadow dark:bg-[#24272b] dark:text-gray-800'>
+        <h2 className='mb-6 flex justify-center text-2xl font-bold dark:text-gray-400'>
+          Signup
+        </h2>
 
         <form onSubmit={handelSubmit}>
-          <div className="mb-4">
+          <div className='mb-4'>
             <label
-              className="mb-2 block text-sm font-bold dark:text-gray-100 text-gray-700"
-              htmlFor="email"
+              className='mb-2 block text-sm font-bold text-gray-700 dark:text-gray-100'
+              htmlFor='email'
             >
               Email
             </label>
@@ -53,17 +52,17 @@ export default function Signup() {
                   email: e.target.value,
                 })
               }
-              type="text"
-              name="email"
-              className="w-full rounded-xl border p-2 focus:border-blue-500 focus:outline-none"
-              placeholder="Enter your email"
+              type='text'
+              name='email'
+              className='w-full rounded-xl border p-2 focus:border-blue-500 focus:outline-none'
+              placeholder='Enter your email'
             />
           </div>
 
-          <div className="mb-4">
+          <div className='mb-4'>
             <label
-              className="mb-2 block text-sm font-bold dark:text-gray-100 text-gray-700"
-              htmlFor="first_name"
+              className='mb-2 block text-sm font-bold text-gray-700 dark:text-gray-100'
+              htmlFor='first_name'
             >
               First Name
             </label>
@@ -75,17 +74,17 @@ export default function Signup() {
                   first_name: e.target.value,
                 })
               }
-              type="text"
-              name="first_name"
-              className="w-full rounded-xl border p-2 focus:border-blue-500 focus:outline-none"
-              placeholder="Enter your first name"
+              type='text'
+              name='first_name'
+              className='w-full rounded-xl border p-2 focus:border-blue-500 focus:outline-none'
+              placeholder='Enter your first name'
             />
           </div>
 
-          <div className="mb-4">
+          <div className='mb-4'>
             <label
-              className="mb-2 block text-sm font-bold dark:text-gray-100 text-gray-700"
-              htmlFor="last_name"
+              className='mb-2 block text-sm font-bold text-gray-700 dark:text-gray-100'
+              htmlFor='last_name'
             >
               Last Name
             </label>
@@ -97,17 +96,17 @@ export default function Signup() {
                   last_name: e.target.value,
                 })
               }
-              type="text"
-              name="first_name"
-              className="w-full rounded-xl border p-2 focus:border-blue-500 focus:outline-none"
-              placeholder="Enter your last name"
+              type='text'
+              name='first_name'
+              className='w-full rounded-xl border p-2 focus:border-blue-500 focus:outline-none'
+              placeholder='Enter your last name'
             />
           </div>
 
-          <div className="mb-4">
+          <div className='mb-4'>
             <label
-              className="mb-2 block text-sm font-bold dark:text-gray-100 text-gray-700"
-              htmlFor="password"
+              className='mb-2 block text-sm font-bold text-gray-700 dark:text-gray-100'
+              htmlFor='password'
             >
               Password
             </label>
@@ -119,17 +118,17 @@ export default function Signup() {
                   password: e.target.value,
                 })
               }
-              name="password"
-              type="password"
-              className="mb-2 w-full rounded-xl border p-2 focus:border-blue-500 focus:outline-none"
-              placeholder="Enter your password"
+              name='password'
+              type='password'
+              className='mb-2 w-full rounded-xl border p-2 focus:border-blue-500 focus:outline-none'
+              placeholder='Enter your password'
             />
           </div>
 
-          <div className="mb-4">
+          <div className='mb-4'>
             <label
-              className="mb-2 block text-sm font-bold dark:text-gray-100 text-gray-700"
-              htmlFor="password"
+              className='mb-2 block text-sm font-bold text-gray-700 dark:text-gray-100'
+              htmlFor='password'
             >
               Confirm Password
             </label>
@@ -141,14 +140,14 @@ export default function Signup() {
                   confirm_password: e.target.value,
                 })
               }
-              name="confirm_password"
-              type="password"
-              className="mb-2 w-full rounded-xl border p-2 focus:border-blue-500 focus:outline-none"
-              placeholder="Enter your password"
+              name='confirm_password'
+              type='password'
+              className='mb-2 w-full rounded-xl border p-2 focus:border-blue-500 focus:outline-none'
+              placeholder='Enter your password'
             />
           </div>
 
-          <button className="w-full rounded-xl bg-gradient-to-r from-green-300 to-green-500 p-2 text-white hover:bg-green-600 focus:outline-none">
+          <button className='w-full rounded-xl bg-gradient-to-r from-green-300 to-green-500 p-2 text-white hover:bg-green-600 focus:outline-none'>
             Signup
           </button>
         </form>

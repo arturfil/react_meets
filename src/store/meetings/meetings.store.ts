@@ -31,7 +31,7 @@ const storeApi: StateCreator<MeetingsState> = (set) => ({
           headers: {
             Authorization: 'Bearer ' + token,
           },
-        }
+        },
       ).then((res) => res.json());
 
       set({ meetings });
@@ -58,5 +58,5 @@ const storeApi: StateCreator<MeetingsState> = (set) => ({
 });
 
 export const useMeetingStore = create<MeetingsState>()(
-  devtools(storeApi, { name: 'meeting-store' })
+  devtools(storeApi, { name: 'meeting-store' }),
 );

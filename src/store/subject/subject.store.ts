@@ -1,7 +1,7 @@
-import { StateCreator, create } from "zustand";
-import { devtools } from "zustand/middleware";
-import { Category } from "@/interfaces/Category";
-import { Subject } from "@/interfaces/Subject";
+import { StateCreator, create } from 'zustand';
+import { devtools } from 'zustand/middleware';
+import { Category } from '@/interfaces/Category';
+import { Subject } from '@/interfaces/Subject';
 
 interface SubjectState {
   subjects: Subject[] | null;
@@ -26,22 +26,22 @@ const storeApi: StateCreator<SubjectState> = (set) => ({
   getSubjects: async () => {
     try {
       const subjects: any = await fetch(
-        process.env.NEXT_PUBLIC_API_URL + "/subjects"
+        process.env.NEXT_PUBLIC_API_URL + '/subjects',
       ).then((res) => res.json());
       set({ subjects });
     } catch (error) {
-      console.log("Error: ", error);
+      console.log('Error: ', error);
     }
   },
 
   getSubjectCategories: async () => {
     try {
       const categories = await fetch(
-        process.env.NEXT_PUBLIC_API_URL + "/categories"
+        process.env.NEXT_PUBLIC_API_URL + '/categories',
       ).then((res) => res.json());
       set({ categories });
     } catch (error) {
-      console.error("Error fetching subject categories:", error);
+      console.error('Error fetching subject categories:', error);
     }
   },
 
@@ -49,13 +49,13 @@ const storeApi: StateCreator<SubjectState> = (set) => ({
     try {
       const searchedSubjects = await fetch(
         process.env.NEXT_PUBLIC_API_URL +
-          `/subjects/search?queryWord=${queryWord}`
+          `/subjects/search?queryWord=${queryWord}`,
       ).then((res) => res.json());
       if (searchedSubjects !== null) {
         set({ searchedSubjects });
       }
     } catch (error) {
-      console.log("Error", error);
+      console.log('Error', error);
     }
   },
 
@@ -63,5 +63,5 @@ const storeApi: StateCreator<SubjectState> = (set) => ({
 });
 
 export const useSubjectStore = create<SubjectState>()(
-  devtools(storeApi, { name: "subject-store" })
+  devtools(storeApi, { name: 'subject-store' }),
 );

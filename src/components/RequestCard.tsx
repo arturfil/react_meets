@@ -1,67 +1,67 @@
 import { useState } from 'react';
-
 import { Check, Clipboard } from 'lucide-react';
-
 import { useRequestStore } from '@/store/requests/requests.store';
-
-import { TableCell, TableRow } from './ui/table';
 import { Button } from './ui/button';
+import { TableCell, TableRow } from './ui/table';
+import { RequestType } from '@/interfaces/Request';
 
 interface Props {
   id: string;
+  user_id: string;
   first_name?: string;
   last_name?: string;
-  type: string;
+  type: RequestType;
   status: string;
 }
 
-export default function RequestCard({ id, first_name, type, status }: Props) {
+export default function RequestCard({user_id, id, first_name, type, status }: Props) {
   const updateRequest = useRequestStore((state) => state.updateRequest);
   const [copied, setCopied] = useState(false);
 
   return (
     <>
       <TableRow key={id}>
-        <TableCell className="font-medium">
-          <p className="w-[100px] overflow-clip overflow-ellipsis text-nowrap">
-            {id}
+        <TableCell className='font-medium'>
+          <p className='w-[100px] overflow-clip overflow-ellipsis text-nowrap'>
+            {user_id}
           </p>
         </TableCell>
         <TableCell>{first_name}</TableCell>
         <TableCell>{type}</TableCell>
         <TableCell>{status}</TableCell>
-        <TableCell className="text-right">
+        <TableCell className='text-right'>
           <Button
             onClick={() =>
               updateRequest({
                 id,
+                user_id,
                 status: 'approved',
-                type,
+                type
               })
             }
           >
             Approve
           </Button>
         </TableCell>
-        <TableCell className="text-right">
+        <TableCell className='text-right'>
           <Button
-            variant="outline"
+            variant='outline'
             onClick={() =>
               updateRequest({
-                id,
+                user_id,
                 status: 'denied',
-                type,
+                type
               })
             }
           >
             Deny
           </Button>
         </TableCell>
-        <TableCell className="cursor-pointer text-right">
+        <TableCell className='cursor-pointer text-right'>
           {!copied ? (
             <Clipboard
               onClick={() => {
-                navigator.clipboard.writeText(id);
+                navigator.clipboard.writeText(user_id);
                 setCopied(true);
                 setTimeout(() => {
                   setCopied(false);

@@ -1,4 +1,4 @@
-"use client"
+'use client';
 
 import { Moon, Sun } from 'lucide-react';
 import { Button } from '../ui/button';
@@ -24,7 +24,7 @@ export default function ThemeToggle() {
   // Handle theme changes
   useEffect(() => {
     if (!mounted) return;
-    
+
     const root = document.documentElement;
     if (theme === 'dark') {
       root.classList.add('dark');
@@ -40,18 +40,18 @@ export default function ThemeToggle() {
 
   return (
     <Button
-      variant="ghost"
-      size="icon"
+      variant='ghost'
+      size='icon'
       onClick={toggleTheme}
-      className="rounded-full"
-      aria-label="Toggle theme"
+      className='rounded-full'
+      aria-label='Toggle theme'
     >
       {theme === 'light' ? (
-        <Sun className="h-5 w-5 text-gray-600 hover:text-gray-900 transition-colors" />
+        <Sun className='h-5 w-5 text-gray-600 transition-colors hover:text-gray-900' />
       ) : (
-        <Moon className="h-5 w-5 text-gray-400 hover:text-white transition-colors" />
+        <Moon className='h-5 w-5 text-gray-400 transition-colors hover:text-white' />
       )}
-      <span className="sr-only">Toggle theme</span>
+      <span className='sr-only'>Toggle theme</span>
     </Button>
   );
 }

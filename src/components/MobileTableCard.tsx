@@ -17,7 +17,7 @@ export default function MobileTableCard({
   const updateRequest = useRequestStore((state) => state.updateRequest);
 
   return (
-    <div className="m-3 rounded-lg border-[1px] border-gray-500 p-3">
+    <div className='m-3 rounded-lg border-[1px] border-gray-500 p-3'>
       <h2>ID: {id}</h2>
       <h2>Name: {first_name}</h2>
       <h2>Type: {type}</h2>
@@ -31,7 +31,7 @@ export default function MobileTableCard({
             type,
           })
         }
-        className="my-2 w-full rounded-lg bg-gradient-to-r from-green-400 to-emerald-500 p-1 text-white hover:bg-green-600 focus:outline-none"
+        className='my-2 w-full rounded-lg bg-gradient-to-r from-green-400 to-emerald-500 p-1 text-white hover:bg-green-600 focus:outline-none'
       >
         Approve
       </button>
@@ -43,7 +43,7 @@ export default function MobileTableCard({
             type,
           })
         }
-        className="w-full rounded-lg bg-gradient-to-r from-red-400 to-orange-500 p-1 text-white hover:bg-green-600 focus:outline-none"
+        className='w-full rounded-lg bg-gradient-to-r from-red-400 to-orange-500 p-1 text-white hover:bg-green-600 focus:outline-none'
       >
         Deny
       </button>

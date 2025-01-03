@@ -17,7 +17,7 @@ export default function AuthGuard(Component: React.FC<any>) {
 
     useEffect(() => {
       if (!isLoggedIn) {
-        redirect('/landing');
+        redirect('/login');
       }
     }, [isLoggedIn]);
 

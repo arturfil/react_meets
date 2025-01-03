@@ -30,32 +30,28 @@ export default function EditSettings() {
   }, [getUserByToken]);
 
   return (
-    <div className="m-auto p-10">
-      <h2 className="mx-auto rounded-md p-4 text-2xl font-bold">
+    <div className='m-auto p-10'>
+      <h2 className='mx-auto rounded-md p-4 text-2xl font-bold'>
         Edit Settings
       </h2>
-      <div className="container flex h-[600px] flex-col rounded-lg border-[1px] border-gray-400 p-6 sm:w-[400px] md:w-[600px] lg:w-[800px]">
-        <div className="grid grid-cols-3">
+      <div className='container flex h-[600px] flex-col rounded-lg border-[1px] border-gray-400 p-6 sm:w-[400px] md:w-[600px] lg:w-[800px]'>
+        <div className='grid grid-cols-3'>
           <h2>Start Work Time</h2>
           <p>8:00 AM</p>
           <ScheduleDialog />
         </div>
-        <div className="grid grid-cols-3">
+        <div className='grid grid-cols-3'>
           <h2>End Work Time</h2>
           <p>6:00 PM</p>
         </div>
-        <hr className="my-2 border-gray-400" />
-        <div className="grid grid-cols-3">
+        <hr className='my-2 border-gray-400' />
+        <div className='grid grid-cols-3'>
           <h2>Subjects Taught</h2>
           <p>{}</p>
           {user && (
-            <Button
-              asChild
-              className="w-[100px]"
-              variant="outline"
-            >
+            <Button asChild className='w-[100px]' variant='outline'>
               <Link href={`/subjects/${user!.id}`}>
-                Edit <Pencil className="ml-4" />
+                Edit <Pencil className='ml-4' />
               </Link>
             </Button>
           )}
@@ -74,15 +70,12 @@ function ScheduleDialog() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button
-          className="w-[100px]"
-          variant="outline"
-        >
+        <Button className='w-[100px]' variant='outline'>
           Edit
-          <Pencil className="ml-4" />
+          <Pencil className='ml-4' />
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:min-h-[400px] sm:max-w-[555px]">
+      <DialogContent className='sm:min-h-[400px] sm:max-w-[555px]'>
         <p>
           {schedule.startTime} - {schedule.endTime}
         </p>
@@ -92,16 +85,13 @@ function ScheduleDialog() {
             Select Start and End Time for available spots
           </DialogDescription>
         </DialogHeader>
-        <div className="grid gap-4 py-4">
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label
-              htmlFor="name"
-              className="text-right"
-            >
+        <div className='grid gap-4 py-4'>
+          <div className='grid grid-cols-4 items-center gap-4'>
+            <Label htmlFor='name' className='text-right'>
               Start Work Time
             </Label>
             <Input
-              type="time"
+              type='time'
               onChange={(e) =>
                 setSchedule({
                   ...schedule,
@@ -109,18 +99,15 @@ function ScheduleDialog() {
                 })
               }
               value={schedule.startTime}
-              className="col-span-3"
+              className='col-span-3'
             />
           </div>
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label
-              htmlFor="username"
-              className="text-right"
-            >
+          <div className='grid grid-cols-4 items-center gap-4'>
+            <Label htmlFor='username' className='text-right'>
               End Work Time
             </Label>
             <Input
-              type="time"
+              type='time'
               onChange={(e) =>
                 setSchedule({
                   ...schedule,
@@ -128,12 +115,12 @@ function ScheduleDialog() {
                 })
               }
               value={schedule.endTime}
-              className="col-span-3"
+              className='col-span-3'
             />
           </div>
         </div>
         <DialogFooter>
-          <Button type="submit">Save changes</Button>
+          <Button type='submit'>Save changes</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

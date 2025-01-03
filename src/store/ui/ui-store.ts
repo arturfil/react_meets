@@ -14,14 +14,14 @@ interface State {
 const getInitialTheme = (): Theme => {
   if (typeof window !== 'undefined') {
     // Check localStorage first
-    const storedTheme = localStorage.getItem('ui_store') 
+    const storedTheme = localStorage.getItem('ui_store')
       ? JSON.parse(localStorage.getItem('ui_store')!).state.theme
       : null;
-    
+
     if (storedTheme) {
       return storedTheme;
     }
-    
+
     // If no stored theme, check system preference
     return window.matchMedia('(prefers-color-scheme: dark)').matches
       ? 'dark'
@@ -46,7 +46,7 @@ const uiStore: StateCreator<State> = (set, get) => ({
 });
 
 export const useUIStore = create<State>()(
-  persist(uiStore, { 
+  persist(uiStore, {
     name: 'ui_store',
     onRehydrateStorage: () => {
       // Apply theme as soon as store is rehydrated
@@ -56,9 +56,12 @@ export const useUIStore = create<State>()(
       }
       return (state) => {
         if (state) {
-          document.documentElement.classList.toggle('dark', state.theme === 'dark');
+          document.documentElement.classList.toggle(
+            'dark',
+            state.theme === 'dark',
+          );
         }
       };
     },
-  })
+  }),
 );

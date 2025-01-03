@@ -2,9 +2,9 @@ export interface Schedule {
   user_id: string;
   start_time: string;
   end_time: string;
-  day: string;
-  created_at: string;
-  updated_at: string;
+  day: WeekDay | '';
+  created_at?: string;
+  updated_at?: string;
 }
 
 export interface TimeSchedule {
@@ -13,8 +13,13 @@ export interface TimeSchedule {
   enabled: boolean;
 }
 
-export type ScheduleUpdateField = "start" | "end" | "enabled";
-
+export type ScheduleUpdateField = 'start' | 'end' | 'enabled';
+export type WeekDay =
+  | 'monday'
+  | 'tuesday'
+  | 'wednesday'
+  | 'thursday'
+  | 'friday';
 
 export interface ScheduleDay {
   monday: TimeSchedule;

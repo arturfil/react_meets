@@ -13,8 +13,8 @@ function Profile() {
   }, [getUserByToken]);
 
   return (
-    <div className="ml-10 mt-16">
-      <h2 className="my-5 text-center text-4xl font-bold">Profile Page</h2>
+    <div className='ml-10 mt-16'>
+      <h2 className='my-5 text-center text-4xl font-bold'>Profile Page</h2>
 
       <h2>
         {user?.first_name} {user?.last_name}

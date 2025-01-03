@@ -21,17 +21,17 @@ export default function RadioSearchGroup({
   let subjectsBadge: RadioType = searchOption === 'Subject' ? 'default' : null;
 
   return (
-    <div className="flox-col flex justify-center gap-3">
+    <div className='flox-col flex justify-center gap-3'>
       <h2>Search Term:</h2>
       <Badge
-        className="cursor-pointer"
+        className='cursor-pointer'
         onClick={() => setSearchOption('Teacher')}
         variant={teachersBadge}
       >
         Teachers
       </Badge>
       <Badge
-        className="cursor-pointer"
+        className='cursor-pointer'
         onClick={() => setSearchOption('Subject')}
         variant={subjectsBadge}
       >

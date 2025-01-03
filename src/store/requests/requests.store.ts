@@ -7,7 +7,9 @@ import { Request } from '@/interfaces/Request';
 interface RequestsState {
   requests: Request[] | null;
   request: Request | null;
+  requestDialog: boolean;
 
+  setRequestDialog: (val: boolean) => void;
   getAllRequests: () => Promise<void>;
   getRequestById: (id: string) => Promise<void>;
   createRequest: (request: Request) => Promise<void>;
@@ -17,11 +19,16 @@ interface RequestsState {
 const storeApi: StateCreator<RequestsState> = (set) => ({
   requests: null,
   request: null,
+  requestDialog: false,
+
+  setRequestDialog: (val: boolean) => {
+    set({requestDialog: val}) 
+  },
 
   getAllRequests: async () => {
     try {
       const requests = await fetch(
-        process.env.NEXT_PUBLIC_API_URL + '/requests'
+        process.env.NEXT_PUBLIC_API_URL + '/requests',
       ).then((res) => res.json());
       console.log(requests);
       set({ requests });
@@ -33,9 +40,8 @@ const storeApi: StateCreator<RequestsState> = (set) => ({
   getRequestById: async (id: string) => {
     try {
       const response: any = await fetch(
-        process.env.NEXT_PUBLIC_API_URL + '/requests/' + id
+        process.env.NEXT_PUBLIC_API_URL + '/requests/' + id,
       ).then((res) => res.json());
-      console.log('req payload', response);
       if (response.error) return;
       set({ request: response });
     } catch (error) {
@@ -67,7 +73,7 @@ const storeApi: StateCreator<RequestsState> = (set) => ({
       });
       set((state) => ({
         requests: state.requests!.map((req) =>
-          req.id === request.id ? { ...req, status: request.status } : req
+          req.id === request.id ? { ...req, status: request.status } : req,
         ),
       }));
       toast.success('updated request');
@@ -76,5 +82,5 @@ const storeApi: StateCreator<RequestsState> = (set) => ({
 });
 
 export const useRequestStore = create<RequestsState>()(
-  devtools(storeApi, { name: 'requests-store' })
+  devtools(storeApi, { name: 'requests-store' }),
 );
