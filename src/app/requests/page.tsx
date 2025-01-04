@@ -12,7 +12,7 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { useRequestStore } from '@/store/requests/requests.store';
-import { Request } from '@/interfaces/Request';
+import { Request, RequestType } from '@/interfaces/Request';
 
 function Requests() {
   const requests = useRequestStore((state) => state.requests);
@@ -61,13 +61,27 @@ function RequestsTable({ requests }: TableProps) {
         </TableHeader>
         <TableBody>
           {requests.map((request) => (
-            <RequestCard key={request.id} {...request} />
+            <RequestCard
+              key={request.id}
+              id={request.id ?? ''}
+              user_id={request.user_id ?? ''}
+              first_name={request.first_name ?? ''}
+              status={request.status ?? ''}
+              type={request.type as RequestType}
+            />
           ))}
         </TableBody>
       </Table>
       <div className='mx-auto grid w-full grid-cols-1 place-items-center justify-center sm:hidden md:hidden lg:hidden xl:hidden 2xl:hidden'>
         {requests.map((request) => (
-          <MobileTableCard key={request.id} {...request} />
+          <MobileTableCard
+            key={request.id}
+            user_id={request.user_id ?? ''}
+            id={request.id ?? ''}
+            first_name={request.first_name ?? ''}
+            status={request.status ?? ''}
+            type={request.type as RequestType}
+          />
         ))}
       </div>
     </div>

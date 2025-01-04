@@ -2,7 +2,7 @@ import { toast } from 'react-toastify';
 import { StateCreator, create } from 'zustand';
 import { devtools } from 'zustand/middleware';
 
-import { Request } from '@/interfaces/Request';
+import { Request, RequestType } from '@/interfaces/Request';
 
 interface RequestsState {
   requests: Request[] | null;
@@ -11,7 +11,7 @@ interface RequestsState {
 
   setRequestDialog: (val: boolean) => void;
   getAllRequests: () => Promise<void>;
-  getRequestById: (id: string) => Promise<void>;
+  getRequestById: (id: string, requestType: RequestType) => Promise<void>;
   createRequest: (request: Request) => Promise<void>;
   updateRequest: (request: Request) => Promise<void>;
 }
@@ -37,10 +37,10 @@ const storeApi: StateCreator<RequestsState> = (set) => ({
     }
   },
 
-  getRequestById: async (id: string) => {
+  getRequestById: async (id: string, requestType: RequestType) => {
     try {
       const response: any = await fetch(
-        process.env.NEXT_PUBLIC_API_URL + '/requests/' + id,
+        process.env.NEXT_PUBLIC_API_URL + '/requests/' + id + `?type=${requestType}`,
       ).then((res) => res.json());
       if (response.error) return;
       set({ request: response });

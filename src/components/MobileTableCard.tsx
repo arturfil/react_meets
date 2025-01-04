@@ -1,15 +1,18 @@
+import { RequestType } from '@/interfaces/Request';
 import { useRequestStore } from '@/store/requests/requests.store';
 
 interface Props {
   id: string;
+  user_id: string;
   first_name?: string;
   last_name?: string;
-  type: string;
+  type: RequestType;
   status: string;
 }
 
 export default function MobileTableCard({
   id,
+  user_id,
   first_name,
   type,
   status,
@@ -27,6 +30,7 @@ export default function MobileTableCard({
         onClick={() =>
           updateRequest({
             id,
+            user_id,
             status: 'approved',
             type,
           })
@@ -39,6 +43,7 @@ export default function MobileTableCard({
         onClick={() =>
           updateRequest({
             id,
+            user_id,
             status: 'denied',
             type,
           })

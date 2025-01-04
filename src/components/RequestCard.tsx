@@ -14,7 +14,13 @@ interface Props {
   status: string;
 }
 
-export default function RequestCard({user_id, id, first_name, type, status }: Props) {
+export default function RequestCard({
+  user_id = '',
+  id = '',
+  first_name,
+  type,
+  status,
+}: Props) {
   const updateRequest = useRequestStore((state) => state.updateRequest);
   const [copied, setCopied] = useState(false);
 
@@ -36,7 +42,7 @@ export default function RequestCard({user_id, id, first_name, type, status }: Pr
                 id,
                 user_id,
                 status: 'approved',
-                type
+                type,
               })
             }
           >
@@ -48,9 +54,10 @@ export default function RequestCard({user_id, id, first_name, type, status }: Pr
             variant='outline'
             onClick={() =>
               updateRequest({
+                id,
                 user_id,
                 status: 'denied',
-                type
+                type,
               })
             }
           >

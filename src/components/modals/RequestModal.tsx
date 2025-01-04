@@ -22,6 +22,7 @@ export default function RequestModal() {
   function submitRequest(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (requestType === '') return;
+    if (!user?.id || !user) return;
     createRequest({user_id: user?.id, type: requestType, value });
   }
 
@@ -30,7 +31,7 @@ export default function RequestModal() {
       <div>
         <label htmlFor='course_name'>Select Request Type</label>
         <select
-          onChange={(e) => setRequestType(e.target.value)}
+          onChange={(e) => setRequestType(e.target.value as SubjectCategoryType)}
           className='w-full rounded-md border-2 border-gray-300 p-2 dark:bg-[#191c21]'
           defaultValue={'default'}
           name=''
@@ -54,7 +55,7 @@ export default function RequestModal() {
           </label>
           <Input name="value" value={value} onChange={e => setValue(e.target.value)} placeholder='Enter value here' />
         </div>
-        <Button onClick={submitRequest}>Submit</Button>
+        <Button type="submit">Submit</Button>
       </form>
     </CustomDialog>
   );

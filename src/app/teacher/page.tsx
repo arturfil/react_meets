@@ -19,7 +19,7 @@ function TeacherPage() {
 
   useEffect(() => {
     if (!user || !user.id) return;
-    getRequestById(user?.id);
+    getRequestById(user?.id, "teach request");
   }, [getRequestById, user]);
 
   return (

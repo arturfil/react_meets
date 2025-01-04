@@ -60,7 +60,7 @@ export default function ScheduleDialog() {
           </DialogDescription>
         </DialogHeader>
         <select
-          onChange={(e) => setSchedule({ ...schedule, day: e.target.value })}
+          onChange={(e) => setSchedule({ ...schedule, day: e.target.value as WeekDay})}
           defaultValue='default'
           className='rounded-md border-2 border-gray-300 p-2 px-10 dark:bg-[#191c21]'
         >

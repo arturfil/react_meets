@@ -30,6 +30,7 @@ function Requests() {
     setLoading(false);
     createRequest({
       id: user?.id,
+      user_id: user.id,
       type: 'teach request',
     });
   }
