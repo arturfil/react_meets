@@ -73,6 +73,7 @@ const SubjectDialog = () => {
         <div className='grid max-h-[400px] gap-4 overflow-y-auto py-4'>
           {subjects?.map((subject: Subject) => (
             <SubjectCard
+              requireConfirmation={false}
               key={subject.id}
               subject={subject}
               action={() => handleTeachingCreate(subject.id, user?.id!)}

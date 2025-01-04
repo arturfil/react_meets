@@ -20,7 +20,7 @@ function Requests() {
     }
     // we are caching the user, there is no point
     // on re-fetching the user by token
-    getRequestById(user?.id);
+    getRequestById(user?.id, "teach request");
     setLoading(false);
   }, [user?.id, getRequestById, loading, user]);
 

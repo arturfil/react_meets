@@ -1,12 +1,29 @@
 import React from 'react';
 
+// Define the allowed values for size and color
+type Size = 'sm' | 'md' | 'lg';
+type Color = 'primary' | 'secondary' | 'success' | 'danger';
+
 interface Props {
-  size: string;
-  color: string;
+  size?: Size;  // Made optional since you have a default value
+  color?: Color; // Made optional since you have a default value
+}
+
+interface SizeConfig {
+  outer: string;
+  middle: string;
+  inner: string;
+  text: string;
+}
+
+interface ColorConfig {
+  outer: string;
+  middle: string;
+  inner: string;
 }
 
 const Spinner = ({ size = 'md', color = 'primary' }: Props) => {
-  const sizeMap = {
+  const sizeMap: Record<Size, SizeConfig> = {
     sm: {
       outer: 'w-8 h-8',
       middle: 'w-6 h-6',
@@ -27,7 +44,7 @@ const Spinner = ({ size = 'md', color = 'primary' }: Props) => {
     },
   };
 
-  const colorMap = {
+  const colorMap: Record<Color, ColorConfig> = {
     primary: {
       outer: 'border-blue-600',
       middle: 'border-blue-400',
