@@ -6,6 +6,7 @@ import { useScheduleStore } from '@/store/schedules/schedule.store';
 import { Schedule, WeekDay } from '@/interfaces/Schedule';
 import { capitalize } from '@/utils/stringUtils';
 import { Button } from '../ui/button';
+import { OperationType } from '@/types/Schedule';
 import {
   Dialog,
   DialogContent,
@@ -28,13 +29,16 @@ export default function ScheduleDialog() {
   ];
 
   const user = useAuthStore((state) => state.user);
+  const prevDay = useScheduleStore(state => state.prevDay);
   const scheduleDialogOpen = useScheduleStore(
     (state) => state.scheduleDialogOpen,
   );
   const setScheduleDialogOpen = useScheduleStore(
     (state) => state.setScheduleDialogOpen,
   );
+  const opType = useScheduleStore((state) => state.opTtype);
   const addSchedule = useScheduleStore((state) => state.addSchedule);
+  const editSchedule = useScheduleStore((state) => state.editSchedule);
 
   const [schedule, setSchedule] = useState<Schedule>({
     user_id: user?.id ?? '',
@@ -44,8 +48,10 @@ export default function ScheduleDialog() {
   });
 
   function handleScheduleSubmit() {
+    if (opType === 'AddSchedule') addSchedule(schedule);
+    if (opType === 'EditSchedule') editSchedule(schedule, prevDay);
+
     setScheduleDialogOpen(false);
-    addSchedule(schedule);
   }
 
   return (
@@ -60,7 +66,9 @@ export default function ScheduleDialog() {
           </DialogDescription>
         </DialogHeader>
         <select
-          onChange={(e) => setSchedule({ ...schedule, day: e.target.value as WeekDay})}
+          onChange={(e) =>
+            setSchedule({ ...schedule, day: e.target.value as WeekDay })
+          }
           defaultValue='default'
           className='rounded-md border-2 border-gray-300 p-2 px-10 dark:bg-[#191c21]'
         >

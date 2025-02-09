@@ -66,9 +66,6 @@ const SubjectDialog = () => {
             Search
           </Button>
         </form>
-        <Link href='/requests/new' className='underline'>
-          Don&apos;t find the course you want? Click here
-        </Link>
 
         <div className='grid max-h-[400px] gap-4 overflow-y-auto py-4'>
           {subjects?.map((subject: Subject) => (

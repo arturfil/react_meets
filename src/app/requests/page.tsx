@@ -55,6 +55,7 @@ function RequestsTable({ requests }: TableProps) {
             <TableHead>Type</TableHead>
             <TableHead>Status</TableHead>
             <TableHead className='text-right'>Approve</TableHead>
+            <TableHead className='text-right'>Value</TableHead>
             <TableHead className='text-right'>Deny</TableHead>
             <TableHead className=''>Copy ID</TableHead>
           </TableRow>
@@ -66,6 +67,7 @@ function RequestsTable({ requests }: TableProps) {
               id={request.id ?? ''}
               user_id={request.user_id ?? ''}
               first_name={request.first_name ?? ''}
+              value={request.value ?? ''}
               status={request.status ?? ''}
               type={request.type as RequestType}
             />

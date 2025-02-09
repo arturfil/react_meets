@@ -10,6 +10,7 @@ interface Props {
   user_id: string;
   first_name?: string;
   last_name?: string;
+  value: string;
   type: RequestType;
   status: string;
 }
@@ -18,6 +19,7 @@ export default function RequestCard({
   user_id = '',
   id = '',
   first_name,
+  value,
   type,
   status,
 }: Props) {
@@ -35,6 +37,7 @@ export default function RequestCard({
         <TableCell>{first_name}</TableCell>
         <TableCell>{type}</TableCell>
         <TableCell>{status}</TableCell>
+        <TableCell>{value}</TableCell>
         <TableCell className='text-right'>
           <Button
             onClick={() =>

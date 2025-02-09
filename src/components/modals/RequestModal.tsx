@@ -55,6 +55,13 @@ export default function RequestModal() {
           </label>
           <Input name="value" value={value} onChange={e => setValue(e.target.value)} placeholder='Enter value here' />
         </div>
+        <div className='mb-4'>
+          <label htmlFor='course_name'>
+            Name of{' '}
+            {requestType === 'create subject request' ? 'Subject' : 'Category'}{' '}
+          </label>
+          <Input name="value" value={value} onChange={e => setValue(e.target.value)} placeholder='Enter value here' />
+        </div>
         <Button type="submit">Submit</Button>
       </form>
     </CustomDialog>

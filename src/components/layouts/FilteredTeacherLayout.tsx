@@ -3,7 +3,6 @@ import { SlidersHorizontal } from 'lucide-react';
 import UserCard from '@/components/cards/UserCard';
 import { Button } from '@/components/ui/button';
 import { User } from '@/interfaces/User';
-import FiltersMenu from './FiltersMenu';
 
 interface FilteredTeacherLayoutProps {
   users?: User[];
@@ -13,7 +12,6 @@ const FilteredTeacherLayout: React.FC<FilteredTeacherLayoutProps> = ({
   users,
 }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
 
   if (!users)
@@ -33,13 +31,6 @@ const FilteredTeacherLayout: React.FC<FilteredTeacherLayoutProps> = ({
 
       <div className='mx-auto max-w-7xl'>
         <div className='flex flex-col lg:flex-row lg:gap-8'>
-          {/* Sidebar */}
-
-          <FiltersMenu
-            isSidebarOpen={isSidebarOpen}
-            toggleSidebar={toggleSidebar}
-          />
-
           {/* Main Content */}
           <main className='flex-1 px-4 py-6 lg:px-6'>
             {/* Mobile Filter Button */}

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 
 import {
   Dialog,
@@ -13,11 +13,14 @@ import { Button } from '../ui/button';
 interface CustomDialogProps {
   isOpen: boolean;
   onOpenChange: (open: boolean) => void;
-  children: React.ReactNode
+  children: React.ReactNode;
 }
 
-export default function CustomDialog({isOpen, onOpenChange, children}: CustomDialogProps) {
-
+export default function CustomDialog({
+  isOpen,
+  onOpenChange,
+  children,
+}: CustomDialogProps) {
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
       <DialogContent className='sm:max-w-[600px]'>
@@ -35,6 +38,5 @@ export default function CustomDialog({isOpen, onOpenChange, children}: CustomDia
         </DialogFooter>
       </DialogContent>
     </Dialog>
-  )
+  );
 }
-

@@ -12,6 +12,7 @@ import ScheduleDialog from '../modals/ScheduleDialog';
 import SubjectDialog from '../modals/SubjectDialog';
 import RequestModal from '../modals/RequestModal';
 import { useRequestStore } from '@/store/requests/requests.store';
+import ScheduleCard from '../cards/ScheduleCard';
 
 const TeacherProfile: React.FC = () => {
   const user = useAuthStore((state) => state.user);
@@ -26,12 +27,13 @@ const TeacherProfile: React.FC = () => {
 
   const schedules = useScheduleStore((state) => state.schedules);
   const getSchedules = useScheduleStore((state) => state.getSchedules);
-
-  const setRequestDialog = useRequestStore((state) => state.setRequestDialog);
-
+  const setOpType = useScheduleStore(state => state.setOpType);
   const setScheduleDialogOpen = useScheduleStore(
     (state) => state.setScheduleDialogOpen,
   );
+
+  const setRequestDialog = useRequestStore((state) => state.setRequestDialog);
+
 
   useEffect(() => {
     if (user?.id) {
@@ -62,9 +64,12 @@ const TeacherProfile: React.FC = () => {
             <p className='mb-4 text-gray-600'>{user?.email}</p>
 
             <div className='flex flex-wrap gap-2'>
-              <Button onClick={() => setScheduleDialogOpen(true)}>
+              <Button onClick={() => {
+                setScheduleDialogOpen(true);
+                setOpType("AddSchedule");
+              }}>
                 <Clock className='mr-2 h-4 w-4' />
-                {schedules ? 'Edit Schedule' : 'Add Your Schedule'}
+                Add Schedule
               </Button>
               <Button onClick={() => setSubjectDialogOpen(true)}>
                 <Plus className='mr-2 h-4 w-4' />
@@ -76,13 +81,6 @@ const TeacherProfile: React.FC = () => {
               </Button>
             </div>
           </div>
-          {/*
-          <div>
-            <Button onClick={() => console.log('works')} variant='ghost'>
-              <Settings />
-            </Button>
-          </div>
-          */}
         </div>
 
         {/* Schedule Display */}
@@ -92,18 +90,7 @@ const TeacherProfile: React.FC = () => {
             {schedules !== null && schedules?.length > 0 ? (
               schedules?.sort((a, b) => a.day.localeCompare(b.day))
                 .map((schedule) => (
-                  <div
-                    key={schedule.day}
-                    className='rounded-lg bg-gray-100 p-4 shadow-sm dark:bg-[#383d44]'
-                  >
-                    <div className='flex items-center justify-between'>
-                      <h3 className='font-medium capitalize'>{schedule.day}</h3>
-                    </div>
-                    <p className='mt-2 text-sm text-gray-400'>
-                      {formatTime(schedule.start_time)} -{' '}
-                      {formatTime(schedule.end_time)}
-                    </p>
-                  </div>
+                  <ScheduleCard key={schedule.day} schedule={schedule} />
                 ))
             ) : (
               <h2>No Schedules created yet</h2>
