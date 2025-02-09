@@ -49,7 +49,7 @@ export default function ScheduleDialog() {
 
   function handleScheduleSubmit() {
     if (opType === 'AddSchedule') addSchedule(schedule);
-    if (opType === 'EditSchedule') editSchedule(schedule, prevDay);
+    if (opType === 'EditSchedule' && prevDay !== null) editSchedule(schedule, prevDay);
 
     setScheduleDialogOpen(false);
   }

@@ -27,6 +27,7 @@ export default function ScheduleCard({ schedule }: Props) {
           </div>
           <div className='hover:cursor-pointer'>
             <Pencil onClick={() => {
+                if (!schedule.day) return;
                 setPrevDay(schedule.day);
                 setScheduleDialogOpen(true);
                 setOpType("EditSchedule");
